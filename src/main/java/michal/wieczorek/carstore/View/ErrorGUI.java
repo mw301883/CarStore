@@ -5,8 +5,6 @@
 package michal.wieczorek.carstore.View;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +31,26 @@ public class ErrorGUI extends JFrame{
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(200, 125);
+        this.setResizable(false);
+        this.setVisible(true);
+        
+        OKButton.addActionListener(e -> dispose());
+    }
+    
+    public ErrorGUI(String Message){
+        ErrorInfo.setText(Message);
+        JPanel Panel = new JPanel();
+        Panel.add(ErrorInfo);
+        Panel.setBorder(new EmptyBorder(10, 30, 10, 30));
+        
+        JPanel ButtonPanel = new JPanel();
+        ButtonPanel.add(OKButton);
+        
+        this.setLayout(new BorderLayout());
+        this.add(ButtonPanel, BorderLayout.SOUTH);
+        this.add(Panel, BorderLayout.CENTER);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setSize(200, 125);
         this.setResizable(false);
         this.setVisible(true);

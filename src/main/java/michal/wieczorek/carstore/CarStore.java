@@ -4,7 +4,7 @@
 
 package michal.wieczorek.carstore;
 
-import michal.wieczorek.carstore.View.SigningGUI;
+import michal.wieczorek.carstore.Controller.AppController;
 
 /**
  *
@@ -13,6 +13,6 @@ import michal.wieczorek.carstore.View.SigningGUI;
 public class CarStore {
 
     public static void main(String[] args) {
-        SigningGUI gui = new SigningGUI();
+        AppController appController = new AppController();
     }
 }

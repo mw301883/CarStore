@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -44,5 +45,15 @@ public class LoginGUI extends JFrame{
         this.add(Panel, BorderLayout.CENTER);
         this.setResizable(false);
         this.setVisible(true);
+        
+        LoginButton.addActionListener(this::validateLogin);
+    }
+    
+    Boolean validateLogin(ActionEvent e){
+        return false;
+    }
+    
+    Boolean validateSign(ActionEvent e){
+        return false;
     }
 }

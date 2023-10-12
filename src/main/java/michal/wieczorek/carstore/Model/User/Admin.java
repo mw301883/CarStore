@@ -8,10 +8,11 @@ package michal.wieczorek.carstore.Model.User;
  *
  * @author Michał
  */
-public class Admin extends User{
+public class Admin{
     
-    public Admin(String name, String surname, String address, String email) {
-        super(name, surname, address, email);
+    private String Password;
+    
+    public Admin(String Password) {
+        this.Password = Password;
     }
-    
 }

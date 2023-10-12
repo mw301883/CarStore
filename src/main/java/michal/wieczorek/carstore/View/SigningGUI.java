@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
@@ -29,12 +30,14 @@ public class SigningGUI extends JFrame{
     private JLabel AddressLabel = new JLabel("Address:");
     private JLabel LoginLabel = new JLabel("Login:");
     private JLabel PasswordLabel = new JLabel("Password:");
+    private JLabel PasswordLabelRepeat = new JLabel("Repeat Password:");
     
     private JTextField NameTextField = new JTextField(10);
     private JTextField SurnameTextField = new JTextField(10);
     private JTextField AddressTextField = new JTextField(20);
     private JTextField LoginTextField = new JTextField(10);
-    private JTextField PasswordTextField = new JTextField(10);
+    private JPasswordField PasswordTextField = new JPasswordField(10);
+    private JPasswordField PasswordTextFieldRepeat = new JPasswordField(10);
     
     private JCheckBox UserCheckbox = new JCheckBox("User");
     private JCheckBox PremiumUserCheckbox = new JCheckBox("Premium User");
@@ -47,7 +50,7 @@ public class SigningGUI extends JFrame{
         InfoPanel.add(InfoLabel);
         
         JPanel Panel = new JPanel();
-        Panel.setLayout(new GridLayout(7, 2));
+        Panel.setLayout(new GridLayout(8, 2));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(400, 300);
         
@@ -62,6 +65,8 @@ public class SigningGUI extends JFrame{
         Panel.add(LoginTextField);
         Panel.add(PasswordLabel);
         Panel.add(PasswordTextField);
+        Panel.add(PasswordLabelRepeat);
+        Panel.add(PasswordTextFieldRepeat);
         Panel.add(UserCheckbox);
         Panel.add(PremiumUserCheckbox);
         
@@ -88,6 +93,7 @@ public class SigningGUI extends JFrame{
             String address = AddressTextField.getText();
             String login = LoginTextField.getText();
             String password = PasswordTextField.getText();
+            String passwordRepeat = PasswordTextFieldRepeat.getText();
             boolean isUser = UserCheckbox.isSelected();
             boolean isPremiumUser = PremiumUserCheckbox.isSelected();
             
@@ -101,8 +107,12 @@ public class SigningGUI extends JFrame{
                System.out.println("Password: " + password);
                System.out.println("Is User: " + isUser);
                System.out.println("Is Premium User: " + isPremiumUser);
-            
-               dispose();   
+               if(password == passwordRepeat){
+                    dispose();   
+                }
+               else{
+                   ErrorGUI ErrorMessage = new ErrorGUI("Different passwords, try again.");
+               }
             }
             else{
                 ErrorGUI ErrorMessage = new ErrorGUI();
