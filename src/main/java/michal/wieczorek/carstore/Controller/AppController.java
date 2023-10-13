@@ -27,9 +27,35 @@ public class AppController {
     ArrayList<StandardUser> standardUsers = new ArrayList<StandardUser>();
     ArrayList<PremiumUser> premiumUsers = new ArrayList<PremiumUser>();
     
+    private LoginGUI loginGUI = new LoginGUI(this);
+    private SigningGUI signingGUI = new SigningGUI(this);
     
     public AppController() {
-        LoginGUI loginGUI = new LoginGUI();
-        //SigningGUI gui = new SigningGUI();
+        runApp();
+    }
+    
+    public void runApp(){
+        loginGUI.setVisible(true);
+    }
+    
+    public void handleLogin(ArrayList<String> loginData){
+        for(String x : loginData){
+            System.out.println(x);
+        }
+    }
+    
+    public void handleSigningUp(){
+        signingGUI.setVisible(true);
+    }
+    
+    public void createNewUser(ArrayList<String> userAttributes, boolean isUser){
+        if(isUser){
+            //StandardUser usr = new StandardUser(userAttributes[0], userAttributes[1], userAttributes[2], userAttributes[3], userAttributes[4], userAttributes[5]);
+           // standardUsers.add();
+        }
+        else{
+        
+        }
+        loginGUI.setVisible(true);
     }
 }

@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,16 +19,20 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
+import michal.wieczorek.carstore.Controller.AppController;
 
 /**
  *
  * @author Michał
  */
 public class SigningGUI extends JFrame{
+    private AppController appController;
+    
     private JLabel InfoLabel = new JLabel("Please fill the form in order to create new account:");
     private JLabel NameLabel = new JLabel("Name:");
     private JLabel SurnameLabel = new JLabel("Surname:");
     private JLabel AddressLabel = new JLabel("Address:");
+    private JLabel EmailLabel = new JLabel("E-mail:");
     private JLabel LoginLabel = new JLabel("Login:");
     private JLabel PasswordLabel = new JLabel("Password:");
     private JLabel PasswordLabelRepeat = new JLabel("Repeat Password:");
@@ -36,6 +41,7 @@ public class SigningGUI extends JFrame{
     private JTextField SurnameTextField = new JTextField(10);
     private JTextField AddressTextField = new JTextField(20);
     private JTextField LoginTextField = new JTextField(10);
+    private JTextField EmailTextField = new JTextField(10);
     private JPasswordField PasswordTextField = new JPasswordField(10);
     private JPasswordField PasswordTextFieldRepeat = new JPasswordField(10);
     
@@ -45,12 +51,14 @@ public class SigningGUI extends JFrame{
     private JButton CreateButton = new JButton("CREATE");
     private ButtonGroup ButtonGroup = new ButtonGroup();
 
-    public SigningGUI(){
+    public SigningGUI(AppController appController){
+        this.appController = appController;
+        
         JPanel InfoPanel = new JPanel();
         InfoPanel.add(InfoLabel);
         
         JPanel Panel = new JPanel();
-        Panel.setLayout(new GridLayout(8, 2));
+        Panel.setLayout(new GridLayout(9, 2));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(400, 300);
         
@@ -61,6 +69,8 @@ public class SigningGUI extends JFrame{
         Panel.add(SurnameTextField);
         Panel.add(AddressLabel);
         Panel.add(AddressTextField);
+        Panel.add(EmailLabel);
+        Panel.add(EmailTextField);
         Panel.add(LoginLabel);
         Panel.add(LoginTextField);
         Panel.add(PasswordLabel);
@@ -84,13 +94,13 @@ public class SigningGUI extends JFrame{
         this.add(Panel, BorderLayout.CENTER);
         this.add(InfoPanel, BorderLayout.NORTH);
         this.setResizable(false);
-        this.setVisible(true);
     }
     
     private void handleCreateButtonClick(ActionEvent e) {
             String name = NameTextField.getText();
             String surname = SurnameTextField.getText();
             String address = AddressTextField.getText();
+            String email = EmailTextField.getText();
             String login = LoginTextField.getText();
             String password = PasswordTextField.getText();
             String passwordRepeat = PasswordTextFieldRepeat.getText();
@@ -99,16 +109,17 @@ public class SigningGUI extends JFrame{
             
             if(validateForm(name, surname, address, login,
                     password, isUser, isPremiumUser)){
-               //TODO
-               System.out.println("Name: " + name);
-               System.out.println("Surname: " + surname);
-               System.out.println("Address: " + address);
-               System.out.println("Login: " + login);
-               System.out.println("Password: " + password);
-               System.out.println("Is User: " + isUser);
-               System.out.println("Is Premium User: " + isPremiumUser);
-               if(password == passwordRepeat){
-                    dispose();   
+               if(password.equals(passwordRepeat)){
+                    setVisible(false);
+                    ArrayList<String> userAttributes = new ArrayList<>();
+                    userAttributes.add(name);
+                    userAttributes.add(surname);
+                    userAttributes.add(address);
+                    userAttributes.add(email);
+                    userAttributes.add(login);
+                    userAttributes.add(password);
+                    appController.createNewUser(userAttributes, isUser);
+                    cleanTextFields();
                 }
                else{
                    ErrorGUI ErrorMessage = new ErrorGUI("Different passwords, try again.");
@@ -127,5 +138,15 @@ public class SigningGUI extends JFrame{
                 }
             }
         return false;
+    }
+    
+    private void cleanTextFields(){
+        NameTextField.setText("");
+        SurnameTextField.setText("");
+        AddressTextField.setText("");
+        LoginTextField.setText("");
+        PasswordTextField.setText("");
+        PasswordTextFieldRepeat.setText("");
+        ButtonGroup.clearSelection();
     }
 }

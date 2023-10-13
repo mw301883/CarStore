@@ -9,14 +9,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import michal.wieczorek.carstore.Controller.AppController;
 
 /**
  *
  * @author Michał
  */
 public class LoginGUI extends JFrame{
+    private AppController appController;
     private JLabel LoginLabel = new JLabel("Login:");
     private JLabel PasswordLabel = new JLabel("Password:");
     private JTextField LoginTextField = new JTextField(10);
@@ -24,7 +27,9 @@ public class LoginGUI extends JFrame{
     private JButton LoginButton = new JButton("SIGN IN");
     private JButton SigningButton = new JButton("SIGN UP");
 
-    public LoginGUI(){
+    public LoginGUI(AppController appController){
+        this.appController = appController;
+        
         JPanel Panel = new JPanel();
         Panel.setLayout(new GridLayout(2, 2));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,16 +49,27 @@ public class LoginGUI extends JFrame{
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
         this.setResizable(false);
-        this.setVisible(true);
+        //this.setVisible(true);
         
         LoginButton.addActionListener(this::validateLogin);
+        SigningButton.addActionListener(this::validateSign);
     }
     
-    Boolean validateLogin(ActionEvent e){
-        return false;
+    void validateLogin(ActionEvent e){
+        ArrayList<String> loginData = new ArrayList<>();
+        loginData.add(LoginTextField.getText());
+        loginData.add(PasswordTextField.getText());
+        appController.handleLogin(loginData);
     }
     
-    Boolean validateSign(ActionEvent e){
-        return false;
+    void validateSign(ActionEvent e){
+        setVisible(false);
+        cleanTextFields();
+        appController.handleSigningUp();
+    }
+    
+    void cleanTextFields(){
+        LoginTextField.setText("");
+        PasswordTextField.setText("");
     }
 }

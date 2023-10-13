@@ -16,10 +16,12 @@ public abstract class User {
     private String login;
     private String password;
     
-    User(String name, String surname, String address, String email){
+    User(String name, String surname, String address, String email, String login, String password){
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.email = email;
+        this.login = login;
+        this.password = password;
     }
 }
