@@ -10,8 +10,8 @@ package michal.wieczorek.carstore.Model.User;
  */
 public class PremiumUser extends User{
     
-    public PremiumUser(String name, String surname, String address, String email) {
-        super(name, surname, address, email);
+    public PremiumUser(String name, String surname, String address, String email, String login, String password) {
+        super(name, surname, address, email, login, password);
     }
     
 }

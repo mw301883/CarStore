@@ -49,7 +49,7 @@ public class LoginGUI extends JFrame{
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
         this.setResizable(false);
-        //this.setVisible(true);
+        this.setLocationRelativeTo(null);
         
         LoginButton.addActionListener(this::validateLogin);
         SigningButton.addActionListener(this::validateSign);

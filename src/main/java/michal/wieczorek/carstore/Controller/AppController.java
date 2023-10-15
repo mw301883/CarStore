@@ -31,16 +31,50 @@ public class AppController {
     private SigningGUI signingGUI = new SigningGUI(this);
     
     public AppController() {
-        runApp();
-    }
-    
-    public void runApp(){
+        //Basic car's initialisation
+        CarsA.add(new CarA("Mercedes-Benz", "C-Class"));
+        CarsA.add(new CarA("Audi", "A4"));
+        CarsA.add(new CarA("BMW", "3 Series"));
+        
+        CarsB.add(new CarB("Mercedes-Benz", "C-Class"));
+        CarsB.add(new CarB("BMW", "3 Series"));
+        CarsB.add(new CarB("Audi", "A4"));
+        
+        CarsC.add(new CarC("Volkswagen", "Golf"));
+        CarsC.add(new CarC("Ford", "Focus"));
+        CarsC.add(new CarC("Honda", "Civic"));
+        
+        //Basic car's price
+        CarA.setPrice(1000.0);
+        CarB.setPrice(750.0);
+        CarC.setPrice(400.0);
+        
         loginGUI.setVisible(true);
     }
     
     public void handleLogin(ArrayList<String> loginData){
-        for(String x : loginData){
-            System.out.println(x);
+        if(loginData.get(0).equals("admin")){
+            if(loginData.get(1).equals(this.AppAdmin.getPassword())){
+                //TODO admin view
+            }
+        }
+        else{
+            for(StandardUser StdUsr : standardUsers){
+                if(loginData.get(0).equals(StdUsr.getUserLogin())){
+                    if(loginData.get(0).equals(StdUsr.getUserLogin())){
+                        //TODO Standard User view
+                        return;
+                    }
+                }
+            }
+            
+            for(PremiumUser StdUsr : premiumUsers){
+                if(loginData.get(0).equals(StdUsr.getUserLogin())){
+                    if(loginData.get(0).equals(StdUsr.getUserLogin())){
+                        //TODO Premium User view
+                    }
+                }
+            }
         }
     }
     
@@ -50,11 +84,14 @@ public class AppController {
     
     public void createNewUser(ArrayList<String> userAttributes, boolean isUser){
         if(isUser){
-            //StandardUser usr = new StandardUser(userAttributes[0], userAttributes[1], userAttributes[2], userAttributes[3], userAttributes[4], userAttributes[5]);
-           // standardUsers.add();
+            standardUsers.add(new StandardUser(userAttributes.get(0), userAttributes.get(1),
+                    userAttributes.get(2), userAttributes.get(3),
+                    userAttributes.get(4), userAttributes.get(5)));
         }
         else{
-        
+            premiumUsers.add(new PremiumUser(userAttributes.get(0), userAttributes.get(1),
+                    userAttributes.get(2), userAttributes.get(3),
+                    userAttributes.get(4), userAttributes.get(5)));
         }
         loginGUI.setVisible(true);
     }

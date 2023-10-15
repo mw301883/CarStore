@@ -15,4 +15,12 @@ public class Admin{
     public Admin(String Password) {
         this.Password = Password;
     }
+    
+    public String getPassword(){
+        return this.Password;
+    }
+    
+    public void setPassword(String Password){
+        this.Password = Password;
+    }
 }

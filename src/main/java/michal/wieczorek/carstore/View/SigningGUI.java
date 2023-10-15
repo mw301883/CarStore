@@ -94,6 +94,7 @@ public class SigningGUI extends JFrame{
         this.add(Panel, BorderLayout.CENTER);
         this.add(InfoPanel, BorderLayout.NORTH);
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
     
     private void handleCreateButtonClick(ActionEvent e) {
@@ -144,6 +145,7 @@ public class SigningGUI extends JFrame{
         NameTextField.setText("");
         SurnameTextField.setText("");
         AddressTextField.setText("");
+        EmailTextField.setText("");
         LoginTextField.setText("");
         PasswordTextField.setText("");
         PasswordTextFieldRepeat.setText("");
