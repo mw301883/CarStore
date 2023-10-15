@@ -29,10 +29,8 @@ public class ErrorGUI extends JFrame{
         this.setLayout(new BorderLayout());
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(200, 125);
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
         this.setVisible(true);
         
         OKButton.addActionListener(e -> dispose());
@@ -50,9 +48,9 @@ public class ErrorGUI extends JFrame{
         this.setLayout(new BorderLayout());
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setSize(200, 125);
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
         
         OKButton.addActionListener(e -> dispose());

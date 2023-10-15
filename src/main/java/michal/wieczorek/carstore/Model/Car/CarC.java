@@ -15,6 +15,10 @@ public class CarC extends Car{
         super(name, mark);
     }
     
+    public static double getPrice(){
+        return CarC.price;
+    }
+    
     public static void setPrice(double price){
         CarC.price = price;
     }

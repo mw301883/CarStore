@@ -59,7 +59,7 @@ public class SigningGUI extends JFrame{
         
         JPanel Panel = new JPanel();
         Panel.setLayout(new GridLayout(9, 2));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(400, 300);
         
         Panel.setBorder(new EmptyBorder(10, 30, 10, 30));

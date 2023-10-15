@@ -55,20 +55,20 @@ public class LoginGUI extends JFrame{
         SigningButton.addActionListener(this::validateSign);
     }
     
-    void validateLogin(ActionEvent e){
+    private void validateLogin(ActionEvent e){
         ArrayList<String> loginData = new ArrayList<>();
         loginData.add(LoginTextField.getText());
         loginData.add(PasswordTextField.getText());
         appController.handleLogin(loginData);
     }
     
-    void validateSign(ActionEvent e){
+    private void validateSign(ActionEvent e){
         setVisible(false);
         cleanTextFields();
         appController.handleSigningUp();
     }
     
-    void cleanTextFields(){
+    public void cleanTextFields(){
         LoginTextField.setText("");
         PasswordTextField.setText("");
     }

@@ -15,6 +15,10 @@ public class CarB extends Car{
         super(name, mark);
     }
     
+    public static double getPrice(){
+        return CarB.price;
+    }
+    
     public static void setPrice(double price){
         CarB.price = price;
     }

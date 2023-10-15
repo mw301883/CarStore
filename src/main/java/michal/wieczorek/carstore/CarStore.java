@@ -5,6 +5,7 @@
 package michal.wieczorek.carstore;
 
 import michal.wieczorek.carstore.Controller.AppController;
+import michal.wieczorek.carstore.View.AdminGUI;
 
 /**
  *

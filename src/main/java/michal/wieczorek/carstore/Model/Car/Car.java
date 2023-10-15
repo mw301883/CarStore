@@ -9,11 +9,21 @@ package michal.wieczorek.carstore.Model.Car;
  * @author Michał
  */
 public abstract class Car {
-    private String name;
-    private String mark;
+    private final String name;
+    private final String mark;
+    boolean isAvaible;
     
     public Car(String name, String mark){
         this.name = name;
         this.mark = mark;
+        this.isAvaible = true;
+    }
+    
+    public void rentCar(){
+        this.isAvaible = false;
+    }
+    
+    public void returnCar(){
+        this.isAvaible = false;
     }
 }
