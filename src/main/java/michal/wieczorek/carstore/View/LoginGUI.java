@@ -53,6 +53,7 @@ public class LoginGUI extends JFrame{
         
         LoginButton.addActionListener(this::validateLogin);
         SigningButton.addActionListener(this::validateSign);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     private void validateLogin(ActionEvent e){

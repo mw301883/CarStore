@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -59,7 +61,6 @@ public class SigningGUI extends JFrame{
         
         JPanel Panel = new JPanel();
         Panel.setLayout(new GridLayout(9, 2));
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(400, 300);
         
         Panel.setBorder(new EmptyBorder(10, 30, 10, 30));
@@ -88,6 +89,14 @@ public class SigningGUI extends JFrame{
         ButtonPanel.add(CreateButton);
         
         CreateButton.addActionListener(this::handleCreateButtonClick);
+        
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                appController.restoreLoginPage();
+                cleanTextFields();
+            }
+        });
         
         this.setLayout(new BorderLayout());
         this.add(ButtonPanel, BorderLayout.SOUTH);

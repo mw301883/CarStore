@@ -87,6 +87,7 @@ public class AdminGUI extends JFrame{
         GenerateRaportButton.addActionListener(this::handleGenerateRaport);
         DisplayRaportsButton.addActionListener(this::handleDisplayRaports);
         LogoutButton.addActionListener(this::handleLogoutButton);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
     
     private void handleCarAButton(ActionEvent e){

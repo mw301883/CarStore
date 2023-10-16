@@ -31,6 +31,7 @@ public class ErrorGUI extends JFrame{
         this.add(Panel, BorderLayout.CENTER);
         this.setSize(200, 125);
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
         
         OKButton.addActionListener(e -> dispose());
