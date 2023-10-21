@@ -5,9 +5,10 @@
 package michal.wieczorek.carstore.View;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,11 +17,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import michal.wieczorek.carstore.Controller.AppController;
 import michal.wieczorek.carstore.Model.AppModel;
+import michal.wieczorek.carstore.Model.Car.CarA;
+import michal.wieczorek.carstore.Model.Car.CarB;
+import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.View.ButtonColumn.ButtonColumn;
 
 /**
  *
@@ -30,85 +35,180 @@ public class StandardUserGUI extends JFrame{
     
     private AppController appController;
     private AppModel appModel;
-    private JLabel infoLabel = new JLabel("Zarezerwuj auto :");
+    private JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
+    private JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
+    private JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
+    private JLabel sessionInfo = new JLabel("Logged as Standard User.");
+    private JLabel userInfo = new JLabel("user info"); //TODO
+    private JButton logoutButton = new JButton("LOGOUT");
 
-    public StandardUserGUI(){
+    public StandardUserGUI(AppController appController, AppModel appModel){
         this.appController = appController;
         this.appModel = appModel;
         
-        JPanel infoPanel = new JPanel();
-        infoPanel.add(infoLabel);
+        JPanel infoPanelA = new JPanel();
+        infoPanelA.add(infoLabelA);
         
-        this.setSize(400, 300);
+        JPanel infoPanelB = new JPanel();
+        infoPanelB.add(infoLabelB);
+        
+        JPanel infoPanelC = new JPanel();
+        infoPanelC.add(infoLabelC);
+        
+        this.setSize(500, 600);
 
-        DefaultTableModel model = new DefaultTableModel() {
+        DefaultTableModel modelCarA = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                if(column == 4){
+                    return true;
+                }
+                else{
+                    return false;   
+                }
             }
         };
-        JTable carsTable = new JTable(model);
+        JTable carsATable = new JTable(modelCarA);
         
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
-        carsTable.setDefaultRenderer(Object.class, renderer);
+        carsATable.setDefaultRenderer(Object.class, renderer);
         
-        carsTable.setRowSelectionAllowed(true);
-        carsTable.setColumnSelectionAllowed(true);
-        carsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        carsTable.setFocusable(false);
+        carsATable.setRowSelectionAllowed(true);
+        carsATable.setColumnSelectionAllowed(true);
+        carsATable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        carsATable.setFocusable(false);
         
-        model.addColumn("ID");
-        model.addColumn("Imię");
-        model.addColumn("Nazwisko");
-        model.addColumn("Wiek");
-        model.addColumn("Akcje");
-
-        carsTable.getColumn("Akcje").setCellRenderer(new TableCellRenderer() {
-            private final JButton button = new JButton();
-
+        modelCarA.addColumn("Name");
+        modelCarA.addColumn("Mark");
+        modelCarA.addColumn("Avaiability");
+        modelCarA.addColumn("Price");
+        modelCarA.addColumn("");
+        
+        for(CarA car : this.appModel.getCarsA()){
+            Action buttonAction = new AbstractAction()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+                            JTable table = (JTable)e.getSource();
+                            int modelRow = Integer.valueOf( e.getActionCommand() );
+                            Object obj = table.getModel().getValueAt(modelRow, 0);
+                            System.out.println((String)obj);
+			}
+		};
+            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarA.getPrice(), "Rent"});
+            ButtonColumn buttonColumn = new ButtonColumn(carsATable, buttonAction, 4);
+        }
+        
+        JScrollPane scrollPaneA = new JScrollPane(carsATable);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        DefaultTableModel modelCarB = new DefaultTableModel() {
             @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                if (value != null) {
-                    button.setText("Click");
-                } else {
-                    button.setText("");
+            public boolean isCellEditable(int row, int column) {
+                if(column == 4){
+                    return true;
                 }
-                button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Obsługa kliknięcia przycisku
-                    // Tutaj możesz umieścić kod do obsługi akcji przycisku
-                    System.out.println("cos");
-                    }
-                });
-                return button;
+                else{
+                    return false;   
+                }
             }
-            
-        });
-        model.addRow(new Object[]{1, "John", "Doe", 30, createButton("Button 1")});
-        model.addRow(new Object[]{2, "Jane", "Smith", 25, createButton("Button 2")});
-        model.addRow(new Object[]{3, "Bob", "Johnson", 40, createButton("Button 3")});
+        };
+        JTable carsBTable = new JTable(modelCarB);
         
-        JScrollPane scrollPane = new JScrollPane(carsTable);
+        carsBTable.setDefaultRenderer(Object.class, renderer);
         
-        this.setLayout(new BorderLayout());
-        this.add(scrollPane, BorderLayout.CENTER);
-        this.add(infoPanel, BorderLayout.NORTH);
+        carsBTable.setRowSelectionAllowed(true);
+        carsBTable.setColumnSelectionAllowed(true);
+        carsBTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        carsBTable.setFocusable(false);
+        
+        modelCarB.addColumn("Name");
+        modelCarB.addColumn("Mark");
+        modelCarB.addColumn("Avaiability");
+        modelCarB.addColumn("Price");
+        modelCarB.addColumn("");
+        
+        for(CarB car : this.appModel.getCarsB()){
+            Action buttonAction = new AbstractAction()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+                            JTable table = (JTable)e.getSource();
+                            int modelRow = Integer.valueOf( e.getActionCommand() );
+                            Object obj = table.getModel().getValueAt(modelRow, 0);
+                            System.out.println((String)obj);
+			}
+		};
+            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarB.getPrice(), "Rent"});
+            ButtonColumn buttonColumn = new ButtonColumn(carsBTable, buttonAction, 4);
+        }
+        
+        JScrollPane scrollPaneB = new JScrollPane(carsBTable);
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        DefaultTableModel modelCarC = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 4){
+                    return true;
+                }
+                else{
+                    return false;   
+                }
+            }
+        };
+        JTable carsCTable = new JTable(modelCarC);
+        
+        carsCTable.setDefaultRenderer(Object.class, renderer);
+        
+        carsCTable.setRowSelectionAllowed(true);
+        carsCTable.setColumnSelectionAllowed(true);
+        carsCTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        carsCTable.setFocusable(false);
+        
+        modelCarC.addColumn("Name");
+        modelCarC.addColumn("Mark");
+        modelCarC.addColumn("Avaiability");
+        modelCarC.addColumn("Price");
+        modelCarC.addColumn("");
+        
+        for(CarC car : this.appModel.getCarsC()){
+            Action buttonAction = new AbstractAction()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+                            JTable table = (JTable)e.getSource();
+                            int modelRow = Integer.valueOf( e.getActionCommand() );
+                            Object obj = table.getModel().getValueAt(modelRow, 0);
+                            System.out.println((String)obj);
+			}
+		};
+            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarC.getPrice(), "Rent"});
+            ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
+        }
+        
+        JScrollPane scrollPaneC = new JScrollPane(carsCTable);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////   
+        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(6, 1));
+        mainPanel.add(infoPanelA);
+        mainPanel.add(scrollPaneA);
+        mainPanel.add(infoPanelB);
+        mainPanel.add(scrollPaneB);
+        mainPanel.add(infoPanelC);
+        mainPanel.add(scrollPaneC);
+        
+        JPanel downPanel = new JPanel();
+        downPanel.setLayout(new GridLayout(1, 3));
+        downPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
+        downPanel.add(this.sessionInfo);
+        downPanel.add(this.userInfo);
+        downPanel.add(this.logoutButton);
+        
+        
+        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(downPanel,BorderLayout.PAGE_END );
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-    }
-    
-    private JButton createButton(String buttonText) {
-        JButton button = new JButton(buttonText);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Obsługa kliknięcia przycisku
-                // Tutaj możesz umieścić kod do obsługi akcji przycisku
-                System.out.println("cos");
-            }
-        });
-        return button;
     }
 }

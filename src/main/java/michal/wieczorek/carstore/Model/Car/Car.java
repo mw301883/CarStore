@@ -9,13 +9,13 @@ package michal.wieczorek.carstore.Model.Car;
  * @author Michał
  */
 public abstract class Car {
-    private final String name;
     private final String mark;
+    private final String name;
     boolean isAvaible;
     
-    public Car(String name, String mark){
+    public Car(String mark, String name){
+         this.mark = mark;
         this.name = name;
-        this.mark = mark;
         this.isAvaible = true;
     }
     
@@ -25,5 +25,17 @@ public abstract class Car {
     
     public void returnCar(){
         this.isAvaible = false;
+    }
+    
+    public String getName(){
+        return this.name;
+    }
+    
+    public String getMark(){
+        return this.mark;
+    }
+    
+    public boolean getIsAvaible(){
+        return this.isAvaible;
     }
 }

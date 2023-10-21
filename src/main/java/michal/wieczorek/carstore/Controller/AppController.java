@@ -30,7 +30,7 @@ public class AppController {
         this.appModel = appModel;
         adminGUI = new AdminGUI(this);
         
-        loginGUI.setVisible(true);
+        //loginGUI.setVisible(true);
     }
     
     public void handleLogin(ArrayList<String> loginData){

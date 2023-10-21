@@ -24,9 +24,15 @@ public class AppModel {
     Admin AppAdmin = new Admin("password");
     ArrayList<StandardUser> standardUsers = new ArrayList<>();
     ArrayList<PremiumUser> premiumUsers = new ArrayList<>();
-
+    
     public AppModel() {
         //Basic car's initialisation
+        carsA.add(new CarA("Mercedes-Benz", "C-Class"));
+        carsA.add(new CarA("Audi", "A4"));
+        carsA.add(new CarA("BMW", "3 Series"));
+        carsA.add(new CarA("Mercedes-Benz", "C-Class"));
+        carsA.add(new CarA("Audi", "A4"));
+        carsA.add(new CarA("BMW", "3 Series"));
         carsA.add(new CarA("Mercedes-Benz", "C-Class"));
         carsA.add(new CarA("Audi", "A4"));
         carsA.add(new CarA("BMW", "3 Series"));
@@ -43,6 +49,18 @@ public class AppModel {
         CarA.setPrice(1000.0);
         CarB.setPrice(750.0);
         CarC.setPrice(400.0);
+    }
+    
+    public ArrayList<CarA> getCarsA(){
+        return this.carsA;
+    }
+    
+    public ArrayList<CarB> getCarsB(){
+        return this.carsB;
+    }
+    
+    public ArrayList<CarC> getCarsC(){
+        return this.carsC;
     }
     
     public int handleLogin(ArrayList<String> loginData){
