@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
 import michal.wieczorek.carstore.Controller.AppController;
 
@@ -27,68 +26,68 @@ import michal.wieczorek.carstore.Controller.AppController;
  *
  * @author Michał
  */
-public class SigningGUI extends JFrame{
+public class SigningGUI extends JFrame {
     private AppController appController;
     
-    private JLabel InfoLabel = new JLabel("Please fill the form in order to create new account:");
-    private JLabel NameLabel = new JLabel("Name:");
-    private JLabel SurnameLabel = new JLabel("Surname:");
-    private JLabel AddressLabel = new JLabel("Address:");
-    private JLabel EmailLabel = new JLabel("E-mail:");
-    private JLabel LoginLabel = new JLabel("Login:");
-    private JLabel PasswordLabel = new JLabel("Password:");
-    private JLabel PasswordLabelRepeat = new JLabel("Repeat Password:");
+    private JLabel infoLabel = new JLabel("Please fill the form in order to create a new account:");
+    private JLabel nameLabel = new JLabel("Name:");
+    private JLabel surnameLabel = new JLabel("Surname:");
+    private JLabel addressLabel = new JLabel("Address:");
+    private JLabel emailLabel = new JLabel("E-mail:");
+    private JLabel loginLabel = new JLabel("Login:");
+    private JLabel passwordLabel = new JLabel("Password:");
+    private JLabel passwordLabelRepeat = new JLabel("Repeat Password:");
     
-    private JTextField NameTextField = new JTextField(10);
-    private JTextField SurnameTextField = new JTextField(10);
-    private JTextField AddressTextField = new JTextField(20);
-    private JTextField LoginTextField = new JTextField(10);
-    private JTextField EmailTextField = new JTextField(10);
-    private JPasswordField PasswordTextField = new JPasswordField(10);
-    private JPasswordField PasswordTextFieldRepeat = new JPasswordField(10);
+    private JTextField nameTextField = new JTextField(10);
+    private JTextField surnameTextField = new JTextField(10);
+    private JTextField addressTextField = new JTextField(20);
+    private JTextField emailTextField = new JTextField(10);
+    private JTextField loginTextField = new JTextField(10);
+    private JPasswordField passwordTextField = new JPasswordField(10);
+    private JPasswordField passwordTextFieldRepeat = new JPasswordField(10);
     
-    private JCheckBox UserCheckbox = new JCheckBox("User");
-    private JCheckBox PremiumUserCheckbox = new JCheckBox("Premium User");
+    private JCheckBox userCheckbox = new JCheckBox("User");
+    private JCheckBox premiumUserCheckbox = new JCheckBox("Premium User");
     
-    private JButton CreateButton = new JButton("CREATE");
-    private ButtonGroup ButtonGroup = new ButtonGroup();
+    private JButton createButton = new JButton("CREATE");
+    private ButtonGroup buttonGroup = new ButtonGroup();
 
-    public SigningGUI(AppController appController){
+    public SigningGUI(AppController appController) {
         this.appController = appController;
         
-        JPanel InfoPanel = new JPanel();
-        InfoPanel.add(InfoLabel);
+        JPanel infoPanel = new JPanel();
+        infoPanel.add(infoLabel);
         
-        JPanel Panel = new JPanel();
-        Panel.setLayout(new GridLayout(9, 2));
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(9, 2));
         this.setSize(400, 300);
         
-        Panel.setBorder(new EmptyBorder(10, 30, 10, 30));
-        Panel.add(NameLabel);
-        Panel.add(NameTextField);
-        Panel.add(SurnameLabel);
-        Panel.add(SurnameTextField);
-        Panel.add(AddressLabel);
-        Panel.add(AddressTextField);
-        Panel.add(EmailLabel);
-        Panel.add(EmailTextField);
-        Panel.add(LoginLabel);
-        Panel.add(LoginTextField);
-        Panel.add(PasswordLabel);
-        Panel.add(PasswordTextField);
-        Panel.add(PasswordLabelRepeat);
-        Panel.add(PasswordTextFieldRepeat);
-        Panel.add(UserCheckbox);
-        Panel.add(PremiumUserCheckbox);
+        panel.setBorder(new EmptyBorder(10, 30, 10, 30));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(surnameLabel);
+        panel.add(surnameTextField);
+        panel.add(addressLabel);
+        panel.add(addressTextField);
+        panel.add(emailLabel);
+        panel.add(emailTextField);
+        panel.add(loginLabel);
+        panel.add(loginTextField);
+        panel.add(passwordLabel);
+        panel.add(passwordTextField);
+        panel.add(passwordLabelRepeat);
+        panel.add(passwordTextFieldRepeat);
+        panel.add(userCheckbox);
+        panel.add(premiumUserCheckbox);
         
-        ButtonGroup.add(UserCheckbox);
-        ButtonGroup.add(PremiumUserCheckbox);
+        buttonGroup.add(userCheckbox);
+        buttonGroup.add(premiumUserCheckbox);
         
-        JPanel ButtonPanel = new JPanel();
-        ButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        ButtonPanel.add(CreateButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(createButton);
         
-        CreateButton.addActionListener(this::handleCreateButtonClick);
+        createButton.addActionListener(this::handleCreateButtonClick);
         
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -99,65 +98,65 @@ public class SigningGUI extends JFrame{
         });
         
         this.setLayout(new BorderLayout());
-        this.add(ButtonPanel, BorderLayout.SOUTH);
-        this.add(Panel, BorderLayout.CENTER);
-        this.add(InfoPanel, BorderLayout.NORTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(panel, BorderLayout.CENTER);
+        this.add(infoPanel, BorderLayout.NORTH);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
     
     private void handleCreateButtonClick(ActionEvent e) {
-            String name = NameTextField.getText();
-            String surname = SurnameTextField.getText();
-            String address = AddressTextField.getText();
-            String email = EmailTextField.getText();
-            String login = LoginTextField.getText();
-            String password = PasswordTextField.getText();
-            String passwordRepeat = PasswordTextFieldRepeat.getText();
-            boolean isUser = UserCheckbox.isSelected();
-            boolean isPremiumUser = PremiumUserCheckbox.isSelected();
-            
-            if(validateForm(name, surname, address, login,
-                    password, isUser, isPremiumUser)){
-               if(password.equals(passwordRepeat)){
-                    setVisible(false);
-                    ArrayList<String> userAttributes = new ArrayList<>();
-                    userAttributes.add(name);
-                    userAttributes.add(surname);
-                    userAttributes.add(address);
-                    userAttributes.add(email);
-                    userAttributes.add(login);
-                    userAttributes.add(password);
-                    appController.createNewUser(userAttributes, isUser);
-                    cleanTextFields();
-                }
-               else{
-                   ErrorGUI ErrorMessage = new ErrorGUI("Different passwords, try again.");
-               }
+        String name = nameTextField.getText();
+        String surname = surnameTextField.getText();
+        String address = addressTextField.getText();
+        String email = emailTextField.getText();
+        String login = loginTextField.getText();
+        String password = new String(passwordTextField.getPassword());
+        String passwordRepeat = new String(passwordTextFieldRepeat.getPassword());
+        boolean isUser = userCheckbox.isSelected();
+        boolean isPremiumUser = premiumUserCheckbox.isSelected();
+        
+        if (validateForm(name, surname, address, login, password, isUser, isPremiumUser)) {
+            if (password.equals(passwordRepeat)) {
+                setVisible(false);
+                ArrayList<String> userAttributes = new ArrayList<>();
+                userAttributes.add(name);
+                userAttributes.add(surname);
+                userAttributes.add(address);
+                userAttributes.add(email);
+                userAttributes.add(login);
+                userAttributes.add(password);
+                appController.createNewUser(userAttributes, isUser);
+                cleanTextFields();
+            } else {
+                ErrorGUI errorMessage = new ErrorGUI("Different passwords, try again.");
+                errorMessage.display();
             }
-            else{
-                ErrorGUI ErrorMessage = new ErrorGUI();
-            }
+        } else {
+            ErrorGUI errorMessage = new ErrorGUI();
+            errorMessage.display();
+        }
     }
     
-    private boolean validateForm(String Name, String Surname, String Address, 
-            String Login, String Password, boolean isUser, boolean isPremiumUser){
-        if(!Name.isBlank() && !Surname.isBlank() && !Address.isBlank() && !Login.isBlank() && !Password.isBlank()){
-                if(isUser || isPremiumUser){
-                    return true;
-                }
+    private boolean validateForm(String name, String surname, String address, 
+            String login, String password, boolean isUser, boolean isPremiumUser) {
+        if (!name.isBlank() && !surname.isBlank() && !address.isBlank() && !login.isBlank() && !password.isBlank()) {
+            if (isUser || isPremiumUser) {
+                return true;
             }
+        }
         return false;
     }
     
-    private void cleanTextFields(){
-        NameTextField.setText("");
-        SurnameTextField.setText("");
-        AddressTextField.setText("");
-        EmailTextField.setText("");
-        LoginTextField.setText("");
-        PasswordTextField.setText("");
-        PasswordTextFieldRepeat.setText("");
-        ButtonGroup.clearSelection();
+    private void cleanTextFields() {
+        nameTextField.setText("");
+        surnameTextField.setText("");
+        addressTextField.setText("");
+        emailTextField.setText("");
+        loginTextField.setText("");
+        passwordTextField.setText("");
+        passwordTextFieldRepeat.setText("");
+        buttonGroup.clearSelection();
     }
 }
+

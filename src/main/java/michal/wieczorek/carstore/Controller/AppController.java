@@ -49,7 +49,8 @@ public class AppController {
                 //adminGUI.setVisible(true);
                 break;
             default:
-                ErrorGUI ErrorMessage = new ErrorGUI();
+                ErrorGUI errorMessage = new ErrorGUI();
+                errorMessage.display();
         }
     }
     

@@ -8,7 +8,7 @@ package michal.wieczorek.carstore;
 
 import michal.wieczorek.carstore.Model.AppModel;
 import michal.wieczorek.carstore.Controller.AppController;
-import michal.wieczorek.carstore.View.AdminGUI;
+import michal.wieczorek.carstore.View.StandardUserGUI;
 
 /**
  *
@@ -17,7 +17,9 @@ import michal.wieczorek.carstore.View.AdminGUI;
 public class CarStore {
 
     public static void main(String[] args) {
-        AppModel appModel = new AppModel();
-        AppController appController = new AppController(appModel);
+       //AppModel appModel = new AppModel();
+        //AppController appController = new AppController(appModel);
+        StandardUserGUI gui = new StandardUserGUI();
+        gui.setVisible(true);
     }
 }

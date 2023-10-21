@@ -5,7 +5,6 @@
 package michal.wieczorek.carstore.View;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,59 +17,60 @@ import michal.wieczorek.carstore.Controller.AppController;
  *
  * @author Michał
  */
-public class LoginGUI extends JFrame{
+public class LoginGUI extends JFrame {
     private AppController appController;
-    private JLabel LoginLabel = new JLabel("Login:");
-    private JLabel PasswordLabel = new JLabel("Password:");
-    private JTextField LoginTextField = new JTextField(10);
-    private JPasswordField PasswordTextField = new JPasswordField(10);
-    private JButton LoginButton = new JButton("SIGN IN");
-    private JButton SigningButton = new JButton("SIGN UP");
+    private JLabel loginLabel = new JLabel("Login:");
+    private JLabel passwordLabel = new JLabel("Password:");
+    private JTextField loginTextField = new JTextField(10);
+    private JPasswordField passwordTextField = new JPasswordField(10);
+    private JButton loginButton = new JButton("SIGN IN");
+    private JButton signingButton = new JButton("SIGN UP");
 
-    public LoginGUI(AppController appController){
+    public LoginGUI(AppController appController) {
         this.appController = appController;
-        
-        JPanel Panel = new JPanel();
-        Panel.setLayout(new GridLayout(2, 2));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 2));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(300, 150);
-        
-        Panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        Panel.add(LoginLabel);
-        Panel.add(LoginTextField);
-        Panel.add(PasswordLabel);
-        Panel.add(PasswordTextField);
-        JPanel ButtonPanel = new JPanel();
-        ButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        ButtonPanel.add(LoginButton);
-        ButtonPanel.add(SigningButton);
-        
+
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel.add(loginLabel);
+        panel.add(loginTextField);
+        panel.add(passwordLabel);
+        panel.add(passwordTextField);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(loginButton);
+        buttonPanel.add(signingButton);
+
         this.setLayout(new BorderLayout());
-        this.add(ButtonPanel, BorderLayout.SOUTH);
-        this.add(Panel, BorderLayout.CENTER);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(panel, BorderLayout.CENTER);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        
-        LoginButton.addActionListener(this::validateLogin);
-        SigningButton.addActionListener(this::validateSign);
+
+        loginButton.addActionListener(this::validateLogin);
+        signingButton.addActionListener(this::validateSign);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    
-    private void validateLogin(ActionEvent e){
+
+    private void validateLogin(ActionEvent e) {
         ArrayList<String> loginData = new ArrayList<>();
-        loginData.add(LoginTextField.getText());
-        loginData.add(PasswordTextField.getText());
+        loginData.add(loginTextField.getText());
+        loginData.add(new String(passwordTextField.getPassword()));
         appController.handleLogin(loginData);
     }
-    
-    private void validateSign(ActionEvent e){
+
+    private void validateSign(ActionEvent e) {
         setVisible(false);
         cleanTextFields();
         appController.handleSigningUp();
     }
-    
-    public void cleanTextFields(){
-        LoginTextField.setText("");
-        PasswordTextField.setText("");
+
+    public void cleanTextFields() {
+        loginTextField.setText("");
+        passwordTextField.setText("");
     }
 }
+

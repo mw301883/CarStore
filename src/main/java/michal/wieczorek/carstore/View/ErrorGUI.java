@@ -16,36 +16,23 @@ import javax.swing.border.EmptyBorder;
  * @author Michał
  */
 public class ErrorGUI extends JFrame{
-    private JLabel ErrorInfo = new JLabel("Bad Credentials, try again.");
-    private JButton OKButton = new JButton("OK");
+    private JLabel errorInfo = new JLabel("Bad Credentials, try again.");
+    private JButton okButton = new JButton("OK");
 
     public ErrorGUI(){
-        JPanel Panel = new JPanel();
-        Panel.add(ErrorInfo);
-        Panel.setBorder(new EmptyBorder(10, 30, 10, 30));
-        
-        JPanel ButtonPanel = new JPanel();
-        ButtonPanel.add(OKButton);
-        this.setLayout(new BorderLayout());
-        this.add(ButtonPanel, BorderLayout.SOUTH);
-        this.add(Panel, BorderLayout.CENTER);
-        this.setSize(200, 125);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        
-        OKButton.addActionListener(e -> dispose());
     }
     
     public ErrorGUI(String Message){
-        ErrorInfo.setText(Message);
+        errorInfo.setText(Message);
+    }
+    
+    public void display(){
         JPanel Panel = new JPanel();
-        Panel.add(ErrorInfo);
+        Panel.add(errorInfo);
         Panel.setBorder(new EmptyBorder(10, 30, 10, 30));
         
         JPanel ButtonPanel = new JPanel();
-        ButtonPanel.add(OKButton);
-        
+        ButtonPanel.add(okButton);
         this.setLayout(new BorderLayout());
         this.add(ButtonPanel, BorderLayout.SOUTH);
         this.add(Panel, BorderLayout.CENTER);
@@ -54,6 +41,6 @@ public class ErrorGUI extends JFrame{
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         
-        OKButton.addActionListener(e -> dispose());
+        okButton.addActionListener(e -> dispose());
     }
 }

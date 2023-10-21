@@ -24,54 +24,54 @@ import michal.wieczorek.carstore.Model.Car.CarC;
  * @author Michał
  */
 public class AdminGUI extends JFrame{
-    private AppController appController;
-    private JLabel InfoLabel = new JLabel("Set price of particular car classes :");
-    private JLabel CarAPriceLabel = new JLabel();
-    private JLabel CarBPriceLabel = new JLabel();
-    private JLabel CarCPriceLabel = new JLabel();
+    private final AppController appController;
+    private final JLabel infoLabel = new JLabel("Set price of particular car classes :");
+    private JLabel carAPriceLabel = new JLabel();
+    private JLabel carBPriceLabel = new JLabel();
+    private JLabel carCPriceLabel = new JLabel();
     
-    private JTextField CarAJTextField = new JTextField(5);
-    private JTextField CarBJTextField = new JTextField(5);
-    private JTextField CarCJTextField = new JTextField(5);
+    private final JTextField carAJTextField = new JTextField(5);
+    private final JTextField carBJTextField = new JTextField(5);
+    private final JTextField carCJTextField = new JTextField(5);
     
-    private JButton CarAButton = new JButton("SET PRICE");
-    private JButton CarBButton = new JButton("SET PRICE");
-    private JButton CarCButton = new JButton("SET PRICE");
-    private JButton GenerateRaportButton = new JButton("GENERATE RAPORT");
-    private JButton DisplayRaportsButton = new JButton("DISPLAY RAPORTS");
-    private JButton LogoutButton = new JButton("LOGOUT");
+    private final JButton carAButton = new JButton("SET PRICE");
+    private final JButton carBButton = new JButton("SET PRICE");
+    private final JButton carCButton = new JButton("SET PRICE");
+    private final JButton generateRaportButton = new JButton("GENERATE RAPORT");
+    private final JButton displayRaportsButton = new JButton("DISPLAY RAPORTS");
+    private final JButton logoutButton = new JButton("LOGOUT");
     
     public AdminGUI(AppController appController){
         this.appController = appController;
         
-        CarAPriceLabel = new JLabel("A-class Cars price : " + CarA.getPrice());
-        CarBPriceLabel = new JLabel("B-class Cars price : " + CarB.getPrice());
-        CarCPriceLabel = new JLabel("C-class Cars price : " + CarC.getPrice());
+        carAPriceLabel = new JLabel("A-class Cars price : " + CarA.getPrice());
+        carBPriceLabel = new JLabel("B-class Cars price : " + CarB.getPrice());
+        carCPriceLabel = new JLabel("C-class Cars price : " + CarC.getPrice());
         
         JPanel InfoPanel = new JPanel();
-        InfoPanel.add(InfoLabel);
+        InfoPanel.add(infoLabel);
         
         JPanel Panel = new JPanel();
         Panel.setLayout(new GridLayout(3, 3));
-        Panel.add(CarAPriceLabel);
-        Panel.add(CarAJTextField);
-        Panel.add(CarAButton);
+        Panel.add(carAPriceLabel);
+        Panel.add(carAJTextField);
+        Panel.add(carAButton);
         
-        Panel.add(CarBPriceLabel);
-        Panel.add(CarBJTextField);
-        Panel.add(CarBButton);
+        Panel.add(carBPriceLabel);
+        Panel.add(carBJTextField);
+        Panel.add(carBButton);
         
-        Panel.add(CarCPriceLabel);
-        Panel.add(CarCJTextField);
-        Panel.add(CarCButton);
+        Panel.add(carCPriceLabel);
+        Panel.add(carCJTextField);
+        Panel.add(carCButton);
         
         Panel.setBorder(new EmptyBorder(50, 10, 50, 10));
         
         JPanel ButtonPanel = new JPanel();
         ButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        ButtonPanel.add(GenerateRaportButton);
-        ButtonPanel.add(DisplayRaportsButton);
-        ButtonPanel.add(LogoutButton);
+        ButtonPanel.add(generateRaportButton);
+        ButtonPanel.add(displayRaportsButton);
+        ButtonPanel.add(logoutButton);
         
         this.setSize(500, 300);
         this.setLayout(new BorderLayout());
@@ -81,37 +81,37 @@ public class AdminGUI extends JFrame{
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
-        CarAButton.addActionListener(this::handleCarAButton);
-        CarBButton.addActionListener(this::handleCarBButton);
-        CarCButton.addActionListener(this::handleCarCButton);
-        GenerateRaportButton.addActionListener(this::handleGenerateRaport);
-        DisplayRaportsButton.addActionListener(this::handleDisplayRaports);
-        LogoutButton.addActionListener(this::handleLogoutButton);
+        carAButton.addActionListener(this::handleCarAButton);
+        carBButton.addActionListener(this::handleCarBButton);
+        carCButton.addActionListener(this::handleCarCButton);
+        generateRaportButton.addActionListener(this::handleGenerateRaport);
+        displayRaportsButton.addActionListener(this::handleDisplayRaports);
+        logoutButton.addActionListener(this::handleLogoutButton);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
     
     private void handleCarAButton(ActionEvent e){
-        double newPrice = Double.parseDouble(CarAJTextField.getText());
+        double newPrice = Double.parseDouble(carAJTextField.getText());
         appController.setCarAPrice(newPrice);
-        CarAPriceLabel.setText("A-class Cars price : " + Double.toString(newPrice));
+        carAPriceLabel.setText("A-class Cars price : " + Double.toString(newPrice));
         ErrorGUI Message = new ErrorGUI("New A-class Car price is set.");
         cleanTextFields();
         repaint();
     }
     
     private void handleCarBButton(ActionEvent e){
-        double newPrice = Double.parseDouble(CarBJTextField.getText());
+        double newPrice = Double.parseDouble(carBJTextField.getText());
         appController.setCarAPrice(newPrice);
-        CarBPriceLabel.setText("B-class Cars price : " + Double.toString(newPrice));
+        carBPriceLabel.setText("B-class Cars price : " + Double.toString(newPrice));
         ErrorGUI Message = new ErrorGUI("New B-class Car price is set.");
         cleanTextFields();
         repaint();
     }
     
     private void handleCarCButton(ActionEvent e){
-        double newPrice = Double.parseDouble(CarCJTextField.getText());
+        double newPrice = Double.parseDouble(carCJTextField.getText());
         appController.setCarAPrice(newPrice);
-        CarCPriceLabel.setText("C-class Cars price : " + Double.toString(newPrice));
+        carCPriceLabel.setText("C-class Cars price : " + Double.toString(newPrice));
         ErrorGUI Message = new ErrorGUI("New C-class Car price is set.");
         cleanTextFields();
         repaint();
@@ -133,8 +133,8 @@ public class AdminGUI extends JFrame{
     }
     
     private void cleanTextFields(){
-        CarAJTextField.setText("");
-        CarBJTextField.setText("");
-        CarCJTextField.setText("");
+        carAJTextField.setText("");
+        carBJTextField.setText("");
+        carCJTextField.setText("");
     }
 }

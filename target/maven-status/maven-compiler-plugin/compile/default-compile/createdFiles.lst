@@ -1,5 +1,6 @@
 michal\wieczorek\carstore\View\AdminGUI.class
 michal\wieczorek\carstore\Controller\AppController.class
+michal\wieczorek\carstore\View\SigningGUI$1.class
 michal\wieczorek\carstore\View\PremiumUserGUI.class
 michal\wieczorek\carstore\Model\Car\CarC.class
 michal\wieczorek\carstore\Model\User\PremiumUser.class
@@ -12,5 +13,6 @@ michal\wieczorek\carstore\Model\Car\Car.class
 michal\wieczorek\carstore\Model\User\Admin.class
 michal\wieczorek\carstore\View\SigningGUI.class
 michal\wieczorek\carstore\Model\Car\CarA.class
+michal\wieczorek\carstore\Model\AppModel.class
 michal\wieczorek\carstore\View\StandardUserGUI.class
 michal\wieczorek\carstore\Model\User\StandardUser.class

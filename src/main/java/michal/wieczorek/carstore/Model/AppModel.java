@@ -17,9 +17,9 @@ import michal.wieczorek.carstore.Model.User.StandardUser;
  * @author Michał
  */
 public class AppModel {
-    ArrayList<CarA> CarsA = new ArrayList<>();
-    ArrayList<CarB> CarsB = new ArrayList<>();
-    ArrayList<CarC> CarsC = new ArrayList<>();
+    ArrayList<CarA> carsA = new ArrayList<>();
+    ArrayList<CarB> carsB = new ArrayList<>();
+    ArrayList<CarC> carsC = new ArrayList<>();
     
     Admin AppAdmin = new Admin("password");
     ArrayList<StandardUser> standardUsers = new ArrayList<>();
@@ -27,17 +27,17 @@ public class AppModel {
 
     public AppModel() {
         //Basic car's initialisation
-        CarsA.add(new CarA("Mercedes-Benz", "C-Class"));
-        CarsA.add(new CarA("Audi", "A4"));
-        CarsA.add(new CarA("BMW", "3 Series"));
+        carsA.add(new CarA("Mercedes-Benz", "C-Class"));
+        carsA.add(new CarA("Audi", "A4"));
+        carsA.add(new CarA("BMW", "3 Series"));
         
-        CarsB.add(new CarB("Mercedes-Benz", "C-Class"));
-        CarsB.add(new CarB("BMW", "3 Series"));
-        CarsB.add(new CarB("Audi", "A4"));
+        carsB.add(new CarB("Mercedes-Benz", "C-Class"));
+        carsB.add(new CarB("BMW", "3 Series"));
+        carsB.add(new CarB("Audi", "A4"));
         
-        CarsC.add(new CarC("Volkswagen", "Golf"));
-        CarsC.add(new CarC("Ford", "Focus"));
-        CarsC.add(new CarC("Honda", "Civic"));
+        carsC.add(new CarC("Volkswagen", "Golf"));
+        carsC.add(new CarC("Ford", "Focus"));
+        carsC.add(new CarC("Honda", "Civic"));
         
         //Basic car's price
         CarA.setPrice(1000.0);
