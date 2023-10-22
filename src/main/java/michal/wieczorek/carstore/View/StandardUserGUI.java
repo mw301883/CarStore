@@ -38,9 +38,13 @@ public class StandardUserGUI extends JFrame{
     private JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
     private JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
     private JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
-    private JLabel sessionInfo = new JLabel("Logged as Standard User.");
-    private JLabel userInfo = new JLabel("user info"); //TODO
+    private JLabel sessionInfo = new JLabel("Logged as Standard User : ");
+    private JLabel userInfo = new JLabel("");
     private JButton logoutButton = new JButton("LOGOUT");
+    
+    private JScrollPane scrollPaneA;  
+    private JScrollPane scrollPaneB;      
+    private JScrollPane scrollPaneC;
 
     public StandardUserGUI(AppController appController, AppModel appModel){
         this.appController = appController;
@@ -57,11 +61,11 @@ public class StandardUserGUI extends JFrame{
         
         this.setSize(600, 600);
         
-        JScrollPane scrollPaneA = fillCarsATable();
+        this.scrollPaneA = fillCarsATable();
         
-        JScrollPane scrollPaneB = fillCarsBTable();
+        this.scrollPaneB = fillCarsBTable();
         
-        JScrollPane scrollPaneC = fillCarsCTable();  
+        this.scrollPaneC = fillCarsCTable();  
         
         this.logoutButton.addActionListener(this::handleLogoutButtonClick);
         
@@ -127,11 +131,13 @@ public class StandardUserGUI extends JFrame{
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.getCurrentUser().addCarAtoOrder(modelRow);
                                 appModel.reserveCarA(modelRow);
                             }
                             else{
                                 table.getModel().setValueAt("Rent", modelRow, 4);
                                 table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.getCurrentUser().removeCarAfromOrder(modelRow);
                                 appModel.returnCarA(modelRow);
                             }
 			}
@@ -178,11 +184,13 @@ public class StandardUserGUI extends JFrame{
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.getCurrentUser().addCarBtoOrder(modelRow);
                                 appModel.reserveCarB(modelRow);
                             }
                             else{
                                 table.getModel().setValueAt("Rent", modelRow, 4);
                                 table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.getCurrentUser().removeCarBfromOrder(modelRow);
                                 appModel.returnCarB(modelRow);
                             }
 			}
@@ -197,6 +205,7 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarC = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
+                //TODO block editable when there is no access
                 if(column == 4){
                     return true;
                 }
@@ -218,7 +227,7 @@ public class StandardUserGUI extends JFrame{
         modelCarC.addColumn("Avaiability");
         modelCarC.addColumn("Price");
         modelCarC.addColumn("");
-        
+        int row_index = 0;
         for(CarC car : this.appModel.getCarsC()){
             Action buttonAction = new AbstractAction()
 		{
@@ -229,17 +238,41 @@ public class StandardUserGUI extends JFrame{
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.getCurrentUser().addCarCtoOrder(modelRow);
                                 appModel.reserveCarC(modelRow);
                             }
                             else{
                                 table.getModel().setValueAt("Rent", modelRow, 4);
                                 table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.getCurrentUser().removeCarCfromOrder(modelRow);
                                 appModel.returnCarC(modelRow);
                             }
 			}
 		};
             modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
+            if(!validateCarAccess(car.getIsAvaible(), row_index)){
+                carsCTable.getModel().setValueAt("No access", row_index, 4);
+            }
+//            if(!car.getIsAvaible()){
+//                if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
+//                    modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), ""});
+//                }
+//                for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
+//                    if(idx == list_index){
+//                        modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
+//                        ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
+//                    }
+//                    else{
+//                        modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), ""});
+//                    }
+//                }
+//            }
+//            else{
+//                modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
+//                ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
+//            }
+            ++row_index;
         } 
         return new JScrollPane(carsCTable);
     }
@@ -252,5 +285,30 @@ public class StandardUserGUI extends JFrame{
     
     private String isAvaibleCar(boolean isAvaible){
         return isAvaible ? "Avaible" : "Not Avaible";
+    }
+    
+    public void setActualUserDisplay(){
+        this.userInfo.setText(this.appModel.getCurrentUser().getUserLogin());
+        this.scrollPaneA = fillCarsATable();
+        this.scrollPaneB = fillCarsBTable();
+        this.scrollPaneC = fillCarsCTable();
+    }
+    
+    private boolean validateCarAccess(boolean isAvaible, int row){
+        if(!isAvaible){
+                if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
+                    System.out.println("no access");
+                    return false;
+                }
+                for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
+                    if(idx == row){
+                        System.out.println("ok");
+                        return true;
+                    }
+                }
+                System.out.println("no access");
+                return false;
+            }
+        return true;
     }
 }

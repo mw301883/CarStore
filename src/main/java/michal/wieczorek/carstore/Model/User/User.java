@@ -66,22 +66,22 @@ public abstract class User {
     }
     
     public void addCarCtoOrder(int index){
-        this.reservedCarsA.add(index);
+        this.reservedCarsC.add(index);
     }
     
     public void removeCarCfromOrder(int index){
-        this.reservedCarsA.remove(index);
+        this.reservedCarsC.remove(index);
     }
     
-    HashSet<Integer> getReservedCarsA(){
+    public HashSet<Integer> getReservedCarsA(){
         return this.reservedCarsA;
     }
     
-    HashSet<Integer> getReservedCarsB(){
+    public HashSet<Integer> getReservedCarsB(){
         return this.reservedCarsB;
     }
     
-    HashSet<Integer> getReservedCarsC(){
+    public HashSet<Integer> getReservedCarsC(){
         return this.reservedCarsC;
     }
 }

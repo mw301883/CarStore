@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
-import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.View.AdminGUI;
 import michal.wieczorek.carstore.View.ErrorGUI;
 import michal.wieczorek.carstore.View.LoginGUI;
@@ -45,6 +44,7 @@ public class AppController {
                 break;
             case 2:
                 loginGUI.setVisible(false);
+                standardUserGUI.setActualUserDisplay();
                 standardUserGUI.setVisible(true);
                 break;
             case 3:
