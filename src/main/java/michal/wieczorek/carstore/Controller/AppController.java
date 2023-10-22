@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.View.AdminGUI;
 import michal.wieczorek.carstore.View.ErrorGUI;
 import michal.wieczorek.carstore.View.LoginGUI;
 import michal.wieczorek.carstore.View.SigningGUI;
+import michal.wieczorek.carstore.View.StandardUserGUI;
 
 /**
  *
@@ -25,12 +27,13 @@ public class AppController {
     private final LoginGUI loginGUI = new LoginGUI(this);
     private final SigningGUI signingGUI = new SigningGUI(this);
     private final AdminGUI adminGUI;
+    private final StandardUserGUI standardUserGUI;
     
     public AppController(AppModel appModel) {
         this.appModel = appModel;
         adminGUI = new AdminGUI(this);
-        
-        //loginGUI.setVisible(true);
+        standardUserGUI = new StandardUserGUI(this, appModel);
+        loginGUI.setVisible(true);
     }
     
     public void handleLogin(ArrayList<String> loginData){
@@ -41,8 +44,8 @@ public class AppController {
                 adminGUI.setVisible(true);
                 break;
             case 2:
-                //loginGUI.setVisible(false);
-                //adminGUI.setVisible(true);
+                loginGUI.setVisible(false);
+                standardUserGUI.setVisible(true);
                 break;
             case 3:
                 //loginGUI.setVisible(false);

@@ -55,8 +55,40 @@ public class StandardUserGUI extends JFrame{
         JPanel infoPanelC = new JPanel();
         infoPanelC.add(infoLabelC);
         
-        this.setSize(500, 600);
-
+        this.setSize(600, 600);
+        
+        JScrollPane scrollPaneA = fillCarsATable();
+        
+        JScrollPane scrollPaneB = fillCarsBTable();
+        
+        JScrollPane scrollPaneC = fillCarsCTable();  
+        
+        this.logoutButton.addActionListener(this::handleLogoutButtonClick);
+        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(6, 1));
+        mainPanel.add(infoPanelA);
+        mainPanel.add(scrollPaneA);
+        mainPanel.add(infoPanelB);
+        mainPanel.add(scrollPaneB);
+        mainPanel.add(infoPanelC);
+        mainPanel.add(scrollPaneC);
+        
+        JPanel downPanel = new JPanel();
+        downPanel.setLayout(new GridLayout(1, 3));
+        downPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
+        downPanel.add(this.sessionInfo);
+        downPanel.add(this.userInfo);
+        downPanel.add(this.logoutButton);
+        
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(downPanel,BorderLayout.PAGE_END );
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+    }
+    
+    private JScrollPane fillCarsATable(){
         DefaultTableModel modelCarA = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -92,16 +124,25 @@ public class StandardUserGUI extends JFrame{
 			{
                             JTable table = (JTable)e.getSource();
                             int modelRow = Integer.valueOf( e.getActionCommand() );
-                            Object obj = table.getModel().getValueAt(modelRow, 0);
-                            System.out.println((String)obj);
+                            if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
+                                table.getModel().setValueAt("Cancel", modelRow, 4);
+                                table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.reserveCarA(modelRow);
+                            }
+                            else{
+                                table.getModel().setValueAt("Rent", modelRow, 4);
+                                table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.returnCarA(modelRow);
+                            }
 			}
 		};
-            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarA.getPrice(), "Rent"});
+            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarA.getPrice(), "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsATable, buttonAction, 4);
-        }
-        
-        JScrollPane scrollPaneA = new JScrollPane(carsATable);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }  
+        return new JScrollPane(carsATable);
+    }
+    
+    private JScrollPane fillCarsBTable(){
         DefaultTableModel modelCarB = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -114,9 +155,8 @@ public class StandardUserGUI extends JFrame{
             }
         };
         JTable carsBTable = new JTable(modelCarB);
-        
-        carsBTable.setDefaultRenderer(Object.class, renderer);
-        
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        carsBTable.setDefaultRenderer(Object.class, renderer);       
         carsBTable.setRowSelectionAllowed(true);
         carsBTable.setColumnSelectionAllowed(true);
         carsBTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -135,16 +175,25 @@ public class StandardUserGUI extends JFrame{
 			{
                             JTable table = (JTable)e.getSource();
                             int modelRow = Integer.valueOf( e.getActionCommand() );
-                            Object obj = table.getModel().getValueAt(modelRow, 0);
-                            System.out.println((String)obj);
+                            if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
+                                table.getModel().setValueAt("Cancel", modelRow, 4);
+                                table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.reserveCarB(modelRow);
+                            }
+                            else{
+                                table.getModel().setValueAt("Rent", modelRow, 4);
+                                table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.returnCarB(modelRow);
+                            }
 			}
 		};
-            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarB.getPrice(), "Rent"});
+            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarB.getPrice(), "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsBTable, buttonAction, 4);
-        }
-        
-        JScrollPane scrollPaneB = new JScrollPane(carsBTable);
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }      
+        return new JScrollPane(carsBTable);
+    }
+    
+    private JScrollPane fillCarsCTable(){
         DefaultTableModel modelCarC = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -157,9 +206,8 @@ public class StandardUserGUI extends JFrame{
             }
         };
         JTable carsCTable = new JTable(modelCarC);
-        
-        carsCTable.setDefaultRenderer(Object.class, renderer);
-        
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        carsCTable.setDefaultRenderer(Object.class, renderer); 
         carsCTable.setRowSelectionAllowed(true);
         carsCTable.setColumnSelectionAllowed(true);
         carsCTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -178,37 +226,31 @@ public class StandardUserGUI extends JFrame{
 			{
                             JTable table = (JTable)e.getSource();
                             int modelRow = Integer.valueOf( e.getActionCommand() );
-                            Object obj = table.getModel().getValueAt(modelRow, 0);
-                            System.out.println((String)obj);
+                            if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
+                                table.getModel().setValueAt("Cancel", modelRow, 4);
+                                table.getModel().setValueAt("Not Avaible", modelRow, 2);
+                                appModel.reserveCarC(modelRow);
+                            }
+                            else{
+                                table.getModel().setValueAt("Rent", modelRow, 4);
+                                table.getModel().setValueAt("Avaible", modelRow, 2);
+                                appModel.returnCarC(modelRow);
+                            }
 			}
 		};
-            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), car.getIsAvaible(), CarC.getPrice(), "Rent"});
+            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
-        }
-        
-        JScrollPane scrollPaneC = new JScrollPane(carsCTable);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////   
-        
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(6, 1));
-        mainPanel.add(infoPanelA);
-        mainPanel.add(scrollPaneA);
-        mainPanel.add(infoPanelB);
-        mainPanel.add(scrollPaneB);
-        mainPanel.add(infoPanelC);
-        mainPanel.add(scrollPaneC);
-        
-        JPanel downPanel = new JPanel();
-        downPanel.setLayout(new GridLayout(1, 3));
-        downPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
-        downPanel.add(this.sessionInfo);
-        downPanel.add(this.userInfo);
-        downPanel.add(this.logoutButton);
-        
-        
-        this.add(mainPanel, BorderLayout.CENTER);
-        this.add(downPanel,BorderLayout.PAGE_END );
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
+        } 
+        return new JScrollPane(carsCTable);
+    }
+    
+    private void handleLogoutButtonClick(ActionEvent e){
+        this.setVisible(false);
+        //TODO logout
+        this.appController.restoreLoginPage();
+    }
+    
+    private String isAvaibleCar(boolean isAvaible){
+        return isAvaible ? "Avaible" : "Not Avaible";
     }
 }

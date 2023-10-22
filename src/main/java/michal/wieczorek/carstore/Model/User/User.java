@@ -5,6 +5,7 @@
 package michal.wieczorek.carstore.Model.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -17,6 +18,9 @@ public abstract class User {
     private String email;
     private String login;
     private String password;
+    private HashSet<Integer> reservedCarsA = new HashSet<>();
+    private HashSet<Integer> reservedCarsB = new HashSet<>();
+    private HashSet<Integer> reservedCarsC = new HashSet<>();
     
     User(String name, String surname, String address, String email, String login, String password){
         this.name = name;
@@ -43,5 +47,41 @@ public abstract class User {
     
     public String getUserPassword(){
         return this.password;
+    }
+    
+    public void addCarAtoOrder(int index){
+        this.reservedCarsA.add(index);
+    }
+    
+    public void removeCarAfromOrder(int index){
+        this.reservedCarsA.remove(index);
+    }
+    
+    public void addCarBtoOrder(int index){
+        this.reservedCarsB.add(index);
+    }
+    
+    public void removeCarBfromOrder(int index){
+        this.reservedCarsB.remove(index);
+    }
+    
+    public void addCarCtoOrder(int index){
+        this.reservedCarsA.add(index);
+    }
+    
+    public void removeCarCfromOrder(int index){
+        this.reservedCarsA.remove(index);
+    }
+    
+    HashSet<Integer> getReservedCarsA(){
+        return this.reservedCarsA;
+    }
+    
+    HashSet<Integer> getReservedCarsB(){
+        return this.reservedCarsB;
+    }
+    
+    HashSet<Integer> getReservedCarsC(){
+        return this.reservedCarsC;
     }
 }

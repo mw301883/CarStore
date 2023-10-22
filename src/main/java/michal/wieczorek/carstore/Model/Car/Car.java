@@ -24,7 +24,7 @@ public abstract class Car {
     }
     
     public void returnCar(){
-        this.isAvaible = false;
+        this.isAvaible = true;
     }
     
     public String getName(){

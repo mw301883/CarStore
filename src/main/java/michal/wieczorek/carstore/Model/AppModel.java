@@ -11,6 +11,7 @@ import michal.wieczorek.carstore.Model.Car.CarC;
 import michal.wieczorek.carstore.Model.User.Admin;
 import michal.wieczorek.carstore.Model.User.PremiumUser;
 import michal.wieczorek.carstore.Model.User.StandardUser;
+import michal.wieczorek.carstore.Model.User.User;
 
 /**
  *
@@ -25,6 +26,8 @@ public class AppModel {
     ArrayList<StandardUser> standardUsers = new ArrayList<>();
     ArrayList<PremiumUser> premiumUsers = new ArrayList<>();
     
+    private User currentUser;
+    
     public AppModel() {
         //Basic car's initialisation
         carsA.add(new CarA("Mercedes-Benz", "C-Class"));
@@ -37,9 +40,9 @@ public class AppModel {
         carsA.add(new CarA("Audi", "A4"));
         carsA.add(new CarA("BMW", "3 Series"));
         
-        carsB.add(new CarB("Mercedes-Benz", "C-Class"));
-        carsB.add(new CarB("BMW", "3 Series"));
-        carsB.add(new CarB("Audi", "A4"));
+        carsB.add(new CarB("Mercedes-Benz", "A-Class"));
+        carsB.add(new CarB("BMW", "4 Series"));
+        carsB.add(new CarB("Audi", "A3"));
         
         carsC.add(new CarC("Volkswagen", "Golf"));
         carsC.add(new CarC("Ford", "Focus"));
@@ -71,19 +74,21 @@ public class AppModel {
             }
         }
         else{
-            for(StandardUser StdUsr : standardUsers){
-                if(loginData.get(0).equals(StdUsr.getUserLogin())){
-                    if(loginData.get(0).equals(StdUsr.getUserLogin())){
+            for(StandardUser stdUsr : standardUsers){
+                if(loginData.get(0).equals(stdUsr.getUserLogin())){
+                    if(loginData.get(1).equals(stdUsr.getUserPassword())){
                         //TODO Standard User view
+                        this.currentUser = stdUsr;
                         return 2;
                     }
                 }
             }
             
-            for(PremiumUser StdUsr : premiumUsers){
-                if(loginData.get(0).equals(StdUsr.getUserLogin())){
-                    if(loginData.get(0).equals(StdUsr.getUserLogin())){
+            for(PremiumUser prmUsr : premiumUsers){
+                if(loginData.get(0).equals(prmUsr.getUserLogin())){
+                    if(loginData.get(1).equals(prmUsr.getUserPassword())){
                         //TODO Premium User view
+                        this.currentUser = prmUsr;
                         return 3;
                     }
                 }
@@ -104,4 +109,31 @@ public class AppModel {
         }
     }
     
+    public void reserveCarA(int index){
+        this.carsA.get(index).rentCar();
+    }
+    
+    public void returnCarA(int index){
+        this.carsA.get(index).returnCar();
+    }
+    
+    public void reserveCarB(int index){
+        this.carsB.get(index).rentCar();
+    }
+    
+    public void returnCarB(int index){
+        this.carsB.get(index).returnCar();
+    }
+    
+    public void reserveCarC(int index){
+        this.carsC.get(index).rentCar();
+    }
+    
+    public void returnCarC(int index){
+        this.carsC.get(index).returnCar();
+    }
+    
+    public User getCurrentUser(){
+        return this.currentUser;
+    }
 }
