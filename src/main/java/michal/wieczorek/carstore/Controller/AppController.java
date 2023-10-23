@@ -12,6 +12,7 @@ import michal.wieczorek.carstore.Model.Car.CarC;
 import michal.wieczorek.carstore.View.AdminGUI;
 import michal.wieczorek.carstore.View.ErrorGUI;
 import michal.wieczorek.carstore.View.LoginGUI;
+import michal.wieczorek.carstore.View.PremiumUserGUI;
 import michal.wieczorek.carstore.View.SigningGUI;
 import michal.wieczorek.carstore.View.StandardUserGUI;
 
@@ -27,29 +28,32 @@ public class AppController {
     private final SigningGUI signingGUI = new SigningGUI(this);
     private final AdminGUI adminGUI;
     private final StandardUserGUI standardUserGUI;
+    private final PremiumUserGUI premiumUserGUI;
     
     public AppController(AppModel appModel) {
         this.appModel = appModel;
-        adminGUI = new AdminGUI(this);
-        standardUserGUI = new StandardUserGUI(this, appModel);
-        loginGUI.setVisible(true);
+        this.adminGUI = new AdminGUI(this);
+        this.standardUserGUI = new StandardUserGUI(this, appModel);
+        this.premiumUserGUI = new PremiumUserGUI(this, appModel);
+        this.loginGUI.setVisible(true);
     }
     
     public void handleLogin(ArrayList<String> loginData){
         int loginChoice = appModel.handleLogin(loginData);
         switch (loginChoice) {
             case 1:
-                loginGUI.setVisible(false);
-                adminGUI.setVisible(true);
+                this.loginGUI.setVisible(false);
+                this.adminGUI.setVisible(true);
                 break;
             case 2:
-                loginGUI.setVisible(false);
-                standardUserGUI.setActualUserDisplay();
-                standardUserGUI.setVisible(true);
+                this.loginGUI.setVisible(false);
+                this.standardUserGUI.setActualUserDisplay(false);
+                this.standardUserGUI.setVisible(true);
                 break;
             case 3:
-                //loginGUI.setVisible(false);
-                //adminGUI.setVisible(true);
+                this.loginGUI.setVisible(false);
+                this.standardUserGUI.setActualUserDisplay(true);
+                this.standardUserGUI.setVisible(true);
                 break;
             default:
                 ErrorGUI errorMessage = new ErrorGUI();
@@ -58,17 +62,17 @@ public class AppController {
     }
     
     public void handleSigningUp(){
-        signingGUI.setVisible(true);
+        this.signingGUI.setVisible(true);
     }
     
     public void createNewUser(ArrayList<String> userAttributes, boolean isUser){
-        appModel.createNewUser(userAttributes, isUser);
-        loginGUI.setVisible(true);
+        this.appModel.createNewUser(userAttributes, isUser);
+        this.loginGUI.setVisible(true);
     }
     
     public void restoreLoginPage(){
-        loginGUI.cleanTextFields();
-        loginGUI.setVisible(true);
+        this.loginGUI.cleanTextFields();
+        this.loginGUI.setVisible(true);
     }
     
     public void setCarAPrice(double NewPrice){

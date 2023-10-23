@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import michal.wieczorek.carstore.Controller.AppController;
 import michal.wieczorek.carstore.Model.AppModel;
+import michal.wieczorek.carstore.Model.Car.Car;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
@@ -38,9 +39,11 @@ public class StandardUserGUI extends JFrame{
     private JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
     private JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
     private JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
-    private JLabel sessionInfo = new JLabel("Logged as Standard User : ");
+    private JLabel sessionInfoStd = new JLabel("Logged as Standard User : ");
+    private JLabel sessionInfoPrm = new JLabel("Logged as Premium User : ");
     private JLabel userInfo = new JLabel("");
     private JButton logoutButton = new JButton("LOGOUT");
+    private boolean isPremium = false;
     
     private JScrollPane scrollPaneA;  
     private JScrollPane scrollPaneB;      
@@ -81,7 +84,12 @@ public class StandardUserGUI extends JFrame{
         JPanel downPanel = new JPanel();
         downPanel.setLayout(new GridLayout(1, 3));
         downPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
-        downPanel.add(this.sessionInfo);
+        if(this.isPremium){
+         downPanel.add(this.sessionInfoPrm);   
+        }
+        else{
+         downPanel.add(this.sessionInfoStd);   
+        }
         downPanel.add(this.userInfo);
         downPanel.add(this.logoutButton);
         
@@ -96,7 +104,7 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarA = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 4){
+                if(column == 4 && validateCarAccess(appModel.getCarsA().get(row), row)){
                     return true;
                 }
                 else{
@@ -152,7 +160,7 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarB = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 4){
+                if(column == 4 && validateCarAccess(appModel.getCarsC().get(row), row)){
                     return true;
                 }
                 else{
@@ -205,8 +213,7 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarC = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                //TODO block editable when there is no access
-                if(column == 4){
+                if(column == 4 && validateCarAccess(appModel.getCarsC().get(row), row)){
                     return true;
                 }
                 else{
@@ -227,7 +234,6 @@ public class StandardUserGUI extends JFrame{
         modelCarC.addColumn("Avaiability");
         modelCarC.addColumn("Price");
         modelCarC.addColumn("");
-        int row_index = 0;
         for(CarC car : this.appModel.getCarsC()){
             Action buttonAction = new AbstractAction()
 		{
@@ -251,35 +257,12 @@ public class StandardUserGUI extends JFrame{
 		};
             modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
-            if(!validateCarAccess(car.getIsAvaible(), row_index)){
-                carsCTable.getModel().setValueAt("No access", row_index, 4);
-            }
-//            if(!car.getIsAvaible()){
-//                if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
-//                    modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), ""});
-//                }
-//                for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
-//                    if(idx == list_index){
-//                        modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
-//                        ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
-//                    }
-//                    else{
-//                        modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), ""});
-//                    }
-//                }
-//            }
-//            else{
-//                modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
-//                ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
-//            }
-            ++row_index;
         } 
         return new JScrollPane(carsCTable);
     }
     
     private void handleLogoutButtonClick(ActionEvent e){
         this.setVisible(false);
-        //TODO logout
         this.appController.restoreLoginPage();
     }
     
@@ -287,28 +270,26 @@ public class StandardUserGUI extends JFrame{
         return isAvaible ? "Avaible" : "Not Avaible";
     }
     
-    public void setActualUserDisplay(){
+    public void setActualUserDisplay(boolean isPremium){
+        this.isPremium = isPremium;
         this.userInfo.setText(this.appModel.getCurrentUser().getUserLogin());
         this.scrollPaneA = fillCarsATable();
         this.scrollPaneB = fillCarsBTable();
         this.scrollPaneC = fillCarsCTable();
     }
     
-    private boolean validateCarAccess(boolean isAvaible, int row){
-        if(!isAvaible){
-                if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
-                    System.out.println("no access");
-                    return false;
-                }
-                for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
-                    if(idx == row){
-                        System.out.println("ok");
-                        return true;
-                    }
-                }
-                System.out.println("no access");
+    private boolean validateCarAccess(Car car, int row){
+        if(!car.getIsAvaible()){
+            if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
                 return false;
             }
+            for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
+                if(idx == row){
+                    return true;
+                }
+            }
+            return false;
+        }
         return true;
     }
 }
