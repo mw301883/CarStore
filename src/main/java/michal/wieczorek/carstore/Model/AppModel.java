@@ -33,12 +33,6 @@ public class AppModel {
         carsA.add(new CarA("Mercedes-Benz", "C-Class"));
         carsA.add(new CarA("Audi", "A4"));
         carsA.add(new CarA("BMW", "3 Series"));
-        carsA.add(new CarA("Mercedes-Benz", "C-Class"));
-        carsA.add(new CarA("Audi", "A4"));
-        carsA.add(new CarA("BMW", "3 Series"));
-        carsA.add(new CarA("Mercedes-Benz", "C-Class"));
-        carsA.add(new CarA("Audi", "A4"));
-        carsA.add(new CarA("BMW", "3 Series"));
         
         carsB.add(new CarB("Mercedes-Benz", "A-Class"));
         carsB.add(new CarB("BMW", "4 Series"));
@@ -79,16 +73,17 @@ public class AppModel {
                     if(loginData.get(1).equals(stdUsr.getUserPassword())){
                         //TODO Standard User view
                         this.currentUser = stdUsr;
+                        this.currentUser.setPriceRate(1.0);
                         return 2;
                     }
                 }
             }
-            
             for(PremiumUser prmUsr : premiumUsers){
                 if(loginData.get(0).equals(prmUsr.getUserLogin())){
                     if(loginData.get(1).equals(prmUsr.getUserPassword())){
                         //TODO Premium User view
                         this.currentUser = prmUsr;
+                        this.currentUser.setPriceRate(0.7);
                         return 3;
                     }
                 }

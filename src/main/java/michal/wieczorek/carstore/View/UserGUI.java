@@ -7,6 +7,7 @@ package michal.wieczorek.carstore.View;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.HashSet;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -32,15 +33,14 @@ import michal.wieczorek.carstore.View.ButtonColumn.ButtonColumn;
  *
  * @author Michał
  */
-public class StandardUserGUI extends JFrame{
+public class UserGUI extends JFrame{
     
     private AppController appController;
     private AppModel appModel;
     private JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
     private JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
     private JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
-    private JLabel sessionInfoStd = new JLabel("Logged as Standard User : ");
-    private JLabel sessionInfoPrm = new JLabel("Logged as Premium User : ");
+    private JLabel sessionInfo = new JLabel("Logged as Standard User : ");
     private JLabel userInfo = new JLabel("");
     private JButton logoutButton = new JButton("LOGOUT");
     private boolean isPremium = false;
@@ -48,8 +48,10 @@ public class StandardUserGUI extends JFrame{
     private JScrollPane scrollPaneA;  
     private JScrollPane scrollPaneB;      
     private JScrollPane scrollPaneC;
+    
+    private double priceRate = 1.0;
 
-    public StandardUserGUI(AppController appController, AppModel appModel){
+    public UserGUI(AppController appController, AppModel appModel){
         this.appController = appController;
         this.appModel = appModel;
         
@@ -84,12 +86,7 @@ public class StandardUserGUI extends JFrame{
         JPanel downPanel = new JPanel();
         downPanel.setLayout(new GridLayout(1, 3));
         downPanel.setBorder(new EmptyBorder(20, 30, 10, 30));
-        if(this.isPremium){
-         downPanel.add(this.sessionInfoPrm);   
-        }
-        else{
-         downPanel.add(this.sessionInfoStd);   
-        }
+        downPanel.add(this.sessionInfo);
         downPanel.add(this.userInfo);
         downPanel.add(this.logoutButton);
         
@@ -104,7 +101,8 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarA = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 4 && validateCarAccess(appModel.getCarsA().get(row), row)){
+                if(column == 4 && validateCarAccess(appModel.getCarsA().get(row), row,
+                        appModel.getCurrentUser().getReservedCarsA().isEmpty(), appModel.getCurrentUser().getReservedCarsA())){
                     return true;
                 }
                 else{
@@ -135,7 +133,7 @@ public class StandardUserGUI extends JFrame{
 			public void actionPerformed(ActionEvent e)
 			{
                             JTable table = (JTable)e.getSource();
-                            int modelRow = Integer.valueOf( e.getActionCommand() );
+                            int modelRow = Integer.valueOf( e.getActionCommand());
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
@@ -150,7 +148,7 @@ public class StandardUserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarA.getPrice(), "Rent"});
+            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarA.getPrice()*this.priceRate, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsATable, buttonAction, 4);
         }  
         return new JScrollPane(carsATable);
@@ -160,7 +158,8 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarB = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 4 && validateCarAccess(appModel.getCarsC().get(row), row)){
+                if(column == 4 && validateCarAccess(appModel.getCarsB().get(row), row, 
+                        appModel.getCurrentUser().getReservedCarsB().isEmpty(), appModel.getCurrentUser().getReservedCarsB())){
                     return true;
                 }
                 else{
@@ -203,7 +202,7 @@ public class StandardUserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarB.getPrice(), "Rent"});
+            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarB.getPrice()*this.priceRate, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsBTable, buttonAction, 4);
         }      
         return new JScrollPane(carsBTable);
@@ -213,7 +212,8 @@ public class StandardUserGUI extends JFrame{
         DefaultTableModel modelCarC = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 4 && validateCarAccess(appModel.getCarsC().get(row), row)){
+                if(column == 4 && validateCarAccess(appModel.getCarsC().get(row), row, 
+                        appModel.getCurrentUser().getReservedCarsC().isEmpty(), appModel.getCurrentUser().getReservedCarsC())){
                     return true;
                 }
                 else{
@@ -255,7 +255,7 @@ public class StandardUserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice(), "Rent"});
+            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice()*this.priceRate, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
         } 
         return new JScrollPane(carsCTable);
@@ -271,19 +271,27 @@ public class StandardUserGUI extends JFrame{
     }
     
     public void setActualUserDisplay(boolean isPremium){
+        if(!isPremium){
+            sessionInfo.setText("Logged as Standard User : ");
+        }
+        else{
+            sessionInfo.setText("Logged as Premium User : ");   
+        }
         this.isPremium = isPremium;
         this.userInfo.setText(this.appModel.getCurrentUser().getUserLogin());
+        this.priceRate = this.appModel.getCurrentUser().getPriceRate();
         this.scrollPaneA = fillCarsATable();
         this.scrollPaneB = fillCarsBTable();
         this.scrollPaneC = fillCarsCTable();
+        //TODO changing price
     }
     
-    private boolean validateCarAccess(Car car, int row){
+    private boolean validateCarAccess(Car car, int row, boolean isUserReservedListEmpty, HashSet<Integer> reservedCars){
         if(!car.getIsAvaible()){
-            if(this.appModel.getCurrentUser().getReservedCarsC().isEmpty()){
+            if(isUserReservedListEmpty){
                 return false;
             }
-            for(int idx : this.appModel.getCurrentUser().getReservedCarsC()){
+            for(int idx : reservedCars){
                 if(idx == row){
                     return true;
                 }

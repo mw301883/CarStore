@@ -12,9 +12,8 @@ import michal.wieczorek.carstore.Model.Car.CarC;
 import michal.wieczorek.carstore.View.AdminGUI;
 import michal.wieczorek.carstore.View.ErrorGUI;
 import michal.wieczorek.carstore.View.LoginGUI;
-import michal.wieczorek.carstore.View.PremiumUserGUI;
 import michal.wieczorek.carstore.View.SigningGUI;
-import michal.wieczorek.carstore.View.StandardUserGUI;
+import michal.wieczorek.carstore.View.UserGUI;
 
 /**
  *
@@ -27,14 +26,12 @@ public class AppController {
     private final LoginGUI loginGUI = new LoginGUI(this);
     private final SigningGUI signingGUI = new SigningGUI(this);
     private final AdminGUI adminGUI;
-    private final StandardUserGUI standardUserGUI;
-    private final PremiumUserGUI premiumUserGUI;
+    private final UserGUI UserGUI;
     
     public AppController(AppModel appModel) {
         this.appModel = appModel;
         this.adminGUI = new AdminGUI(this);
-        this.standardUserGUI = new StandardUserGUI(this, appModel);
-        this.premiumUserGUI = new PremiumUserGUI(this, appModel);
+        this.UserGUI = new UserGUI(this, appModel);
         this.loginGUI.setVisible(true);
     }
     
@@ -47,13 +44,13 @@ public class AppController {
                 break;
             case 2:
                 this.loginGUI.setVisible(false);
-                this.standardUserGUI.setActualUserDisplay(false);
-                this.standardUserGUI.setVisible(true);
+                this.UserGUI.setActualUserDisplay(false);
+                this.UserGUI.setVisible(true);
                 break;
             case 3:
                 this.loginGUI.setVisible(false);
-                this.standardUserGUI.setActualUserDisplay(true);
-                this.standardUserGUI.setVisible(true);
+                this.UserGUI.setActualUserDisplay(true);
+                this.UserGUI.setVisible(true);
                 break;
             default:
                 ErrorGUI errorMessage = new ErrorGUI();

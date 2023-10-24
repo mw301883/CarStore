@@ -21,6 +21,7 @@ public abstract class User {
     private HashSet<Integer> reservedCarsA = new HashSet<>();
     private HashSet<Integer> reservedCarsB = new HashSet<>();
     private HashSet<Integer> reservedCarsC = new HashSet<>();
+    private double priceRate;
     
     User(String name, String surname, String address, String email, String login, String password){
         this.name = name;
@@ -29,6 +30,7 @@ public abstract class User {
         this.email = email;
         this.login = login;
         this.password = password;
+        this.priceRate = 1.0;
     }
     
     public ArrayList<String> getUserData(){
@@ -83,5 +85,13 @@ public abstract class User {
     
     public HashSet<Integer> getReservedCarsC(){
         return this.reservedCarsC;
+    }
+    
+    public double getPriceRate(){
+        return this.priceRate;
+    }
+    
+    public void setPriceRate(double priceRate){
+        this.priceRate = priceRate;
     }
 }
