@@ -137,14 +137,12 @@ public class StandardUserGUI extends JFrame{
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
-                                appModel.getCurrentUser().addCarAtoOrder(modelRow);
-                                appModel.reserveCarA(modelRow);
+                                appController.reserveCurrentUserCarA(modelRow);
                             }
                             else{
                                 table.getModel().setValueAt("Rent", modelRow, 4);
                                 table.getModel().setValueAt("Avaible", modelRow, 2);
-                                appModel.getCurrentUser().removeCarAfromOrder(modelRow);
-                                appModel.returnCarA(modelRow);
+                                appController.removeCurrentUserCarA(modelRow);
                             }
 			}
 		};
@@ -192,14 +190,12 @@ public class StandardUserGUI extends JFrame{
                             if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                                 table.getModel().setValueAt("Cancel", modelRow, 4);
                                 table.getModel().setValueAt("Not Avaible", modelRow, 2);
-                                appModel.getCurrentUser().addCarBtoOrder(modelRow);
-                                appModel.reserveCarB(modelRow);
+                                appController.reserveCurrentUserCarB(modelRow);
                             }
                             else{
                                 table.getModel().setValueAt("Rent", modelRow, 4);
                                 table.getModel().setValueAt("Avaible", modelRow, 2);
-                                appModel.getCurrentUser().removeCarBfromOrder(modelRow);
-                                appModel.returnCarB(modelRow);
+                                appController.removeCurrentUserCarB(modelRow);
                             }
 			}
 		};
@@ -246,14 +242,12 @@ public class StandardUserGUI extends JFrame{
                         if( "Rent".equals((String)table.getModel().getValueAt(modelRow, 4))){
                             table.getModel().setValueAt("Cancel", modelRow, 4);
                             table.getModel().setValueAt("Not Avaible", modelRow, 2);
-                            appModel.getCurrentUser().addCarCtoOrder(modelRow);
-                            appModel.reserveCarC(modelRow);
+                            appController.reserveCurrentUserCarC(modelRow);
                         }
                         else{
                             table.getModel().setValueAt("Rent", modelRow, 4);
                             table.getModel().setValueAt("Avaible", modelRow, 2);
-                            appModel.getCurrentUser().removeCarCfromOrder(modelRow);
-                            appModel.returnCarC(modelRow);
+                            appController.removeCurrentUserCarC(modelRow);
                         }
                     }
 		};

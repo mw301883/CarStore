@@ -76,7 +76,6 @@ public class AppModel {
                     if(loginData.get(1).equals(stdUsr.getUserPassword())){
                         //TODO Standard User view
                         this.currentUser = stdUsr;
-                        this.currentUser.setPriceRate(1.0);
                         return 2;
                     }
                 }
@@ -86,7 +85,6 @@ public class AppModel {
                     if(loginData.get(1).equals(prmUsr.getUserPassword())){
                         //TODO Premium User view
                         this.currentUser = prmUsr;
-                        this.currentUser.setPriceRate(0.7);
                         return 3;
                     }
                 }
@@ -133,5 +131,17 @@ public class AppModel {
     
     public User getCurrentUser(){
         return this.currentUser;
+    }
+    
+    public void addCustomerToRaport(User customer){
+        this.currentRaport.addCustomer(customer);
+    }
+    
+    public void removeCustomerFromRaport(User customer){
+        this.currentRaport.removeCustomer(customer);
+    }
+    
+    public void generateRaport(){
+        this.raportsList.add(this.currentRaport);
     }
 }

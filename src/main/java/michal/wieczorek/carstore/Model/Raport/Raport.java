@@ -16,18 +16,33 @@ public class Raport {
     private double totalPrice = 0.0;
     private Calendar date;
     private ArrayList<User> customerList = new ArrayList<>();
-    private ArrayList<Double> paymentList = new ArrayList<>();
-
-    public Raport() {
-    }
     
     public void calculateTotalPrice(){
-        for(Double price : this.paymentList){
-            this.totalPrice += price;
+        for(User user : this.customerList){
+            this.totalPrice += user.getPayment();
         }
     }
     
     public void calculateDate(){
         this.date = Calendar.getInstance();
+    }
+    
+    public void addCustomer(User customer){
+        this.customerList.add(customer);
+    }
+    
+    public void removeCustomer(User user){
+        int idx = 0;
+        for(User customer : this.customerList){
+            if(customer.getUserName().equals(user.getUserName()) &&
+               customer.getUserSurname().equals(user.getUserSurname()) &&
+               customer.getUserAddress().equals(user.getUserAddress()) &&
+               customer.getUserEmail().equals(user.getUserEmail()) &&
+               customer.getUserLogin().equals(user.getUserLogin())){
+                this.customerList.remove(idx);
+                return;
+            }
+            ++idx;
+        }
     }
 }

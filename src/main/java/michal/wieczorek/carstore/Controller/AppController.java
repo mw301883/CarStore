@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.View.AdminGUI;
 import michal.wieczorek.carstore.View.ErrorGUI;
 import michal.wieczorek.carstore.View.LoginGUI;
@@ -85,5 +86,57 @@ public class AppController {
     
     public void setCarCPrice(double NewPrice){
         CarC.setPrice(NewPrice);
+    }
+    
+    public void reserveCurrentUserCarA(int index){
+        addCustomerToRaport();
+        this.appModel.getCurrentUser().addCarAtoOrder(index);
+        this.appModel.reserveCarA(index);
+    }
+    
+    public void removeCurrentUserCarA(int index){
+        this.appModel.getCurrentUser().removeCarAfromOrder(index);
+        this.appModel.returnCarA(index);
+        actualiseRaport();
+    }
+    
+    public void reserveCurrentUserCarB(int index){
+        addCustomerToRaport();
+        this.appModel.getCurrentUser().addCarBtoOrder(index);
+        this.appModel.reserveCarB(index);
+    }
+    
+    public void removeCurrentUserCarB(int index){
+        this.appModel.getCurrentUser().removeCarBfromOrder(index);
+        this.appModel.returnCarB(index);
+        actualiseRaport();
+    }
+    
+    public void reserveCurrentUserCarC(int index){
+        addCustomerToRaport();
+        this.appModel.getCurrentUser().addCarCtoOrder(index);
+        this.appModel.reserveCarC(index);
+    }
+    
+    public void removeCurrentUserCarC(int index){
+        this.appModel.getCurrentUser().removeCarCfromOrder(index);
+        this.appModel.returnCarC(index);
+        actualiseRaport();
+    }
+    
+    private void addCustomerToRaport(){
+        User user = this.appModel.getCurrentUser();
+        if(user.getPayment() >= 0){
+            this.appModel.removeCustomerFromRaport(user);
+            this.appModel.addCustomerToRaport(user);
+        }
+    }
+    //TODO set discount to Premium User and fix display "avaible" in premium gui
+    private void actualiseRaport(){
+        User user = this.appModel.getCurrentUser();
+        this.appModel.removeCustomerFromRaport(user);
+        if(user.getPayment() > 0){
+            this.appModel.addCustomerToRaport(user);
+        }
     }
 }

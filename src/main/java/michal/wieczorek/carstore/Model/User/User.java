@@ -6,6 +6,9 @@ package michal.wieczorek.carstore.Model.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import michal.wieczorek.carstore.Model.Car.CarA;
+import michal.wieczorek.carstore.Model.Car.CarB;
+import michal.wieczorek.carstore.Model.Car.CarC;
 
 /**
  *
@@ -21,7 +24,8 @@ public abstract class User {
     private HashSet<Integer> reservedCarsA = new HashSet<>();
     private HashSet<Integer> reservedCarsB = new HashSet<>();
     private HashSet<Integer> reservedCarsC = new HashSet<>();
-    private double priceRate;
+    private double payment = 0.0;
+    
     
     User(String name, String surname, String address, String email, String login, String password){
         this.name = name;
@@ -30,7 +34,6 @@ public abstract class User {
         this.email = email;
         this.login = login;
         this.password = password;
-        this.priceRate = 1.0;
     }
     
     public ArrayList<String> getUserData(){
@@ -43,6 +46,22 @@ public abstract class User {
         return UserData;
     }
     
+    public String getUserName(){
+        return this.name;
+    }
+    
+    public String getUserSurname(){
+        return this.surname;
+    }
+    
+    public String getUserAddress(){
+        return this.address;
+    }
+    
+    public String getUserEmail(){
+        return this.email;
+    }
+    
     public String getUserLogin(){
         return this.login;
     }
@@ -53,26 +72,32 @@ public abstract class User {
     
     public void addCarAtoOrder(int index){
         this.reservedCarsA.add(index);
+        this.payment += CarA.getPrice();
     }
     
     public void removeCarAfromOrder(int index){
         this.reservedCarsA.remove(index);
+        this.payment -= CarA.getPrice();
     }
     
     public void addCarBtoOrder(int index){
         this.reservedCarsB.add(index);
+        this.payment += CarB.getPrice();
     }
     
     public void removeCarBfromOrder(int index){
         this.reservedCarsB.remove(index);
+        this.payment -= CarB.getPrice();
     }
     
     public void addCarCtoOrder(int index){
         this.reservedCarsC.add(index);
+        this.payment += CarC.getPrice();
     }
     
     public void removeCarCfromOrder(int index){
         this.reservedCarsC.remove(index);
+        this.payment -= CarA.getPrice();
     }
     
     public HashSet<Integer> getReservedCarsA(){
@@ -87,11 +112,18 @@ public abstract class User {
         return this.reservedCarsC;
     }
     
-    public double getPriceRate(){
-        return this.priceRate;
+    public double getPayment(){
+        return this.payment;
     }
     
-    public void setPriceRate(double priceRate){
-        this.priceRate = priceRate;
+    public boolean areCarListsEmpty(){
+        if(this.reservedCarsA.isEmpty()){
+            if(this.reservedCarsB.isEmpty()){
+                if(this.reservedCarsC.isEmpty()){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
