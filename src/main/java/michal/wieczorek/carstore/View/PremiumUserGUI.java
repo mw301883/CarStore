@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -33,25 +34,22 @@ import michal.wieczorek.carstore.View.ButtonColumn.ButtonColumn;
  *
  * @author Michał
  */
-public class UserGUI extends JFrame{
+public class PremiumUserGUI extends JFrame{
     
     private AppController appController;
     private AppModel appModel;
     private JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
     private JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
     private JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
-    private JLabel sessionInfo = new JLabel("Logged as Standard User : ");
+    private JLabel sessionInfo = new JLabel("Logged as Premium User : ");
     private JLabel userInfo = new JLabel("");
     private JButton logoutButton = new JButton("LOGOUT");
-    private boolean isPremium = false;
     
     private JScrollPane scrollPaneA;  
     private JScrollPane scrollPaneB;      
     private JScrollPane scrollPaneC;
-    
-    private double priceRate = 1.0;
 
-    public UserGUI(AppController appController, AppModel appModel){
+    public PremiumUserGUI(AppController appController, AppModel appModel){
         this.appController = appController;
         this.appModel = appModel;
         
@@ -148,7 +146,7 @@ public class UserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarA.getPrice()*this.priceRate, "Rent"});
+            modelCarA.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarA.getPrice()*0.7, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsATable, buttonAction, 4);
         }  
         return new JScrollPane(carsATable);
@@ -202,7 +200,7 @@ public class UserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarB.getPrice()*this.priceRate, "Rent"});
+            modelCarB.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarB.getPrice()*0.7, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsBTable, buttonAction, 4);
         }      
         return new JScrollPane(carsBTable);
@@ -255,7 +253,7 @@ public class UserGUI extends JFrame{
                             }
 			}
 		};
-            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice()*this.priceRate, "Rent"});
+            modelCarC.addRow(new Object[]{car.getName(), car.getMark(), isAvaibleCar(car.getIsAvaible()), CarC.getPrice()*0.7, "Rent"});
             ButtonColumn buttonColumn = new ButtonColumn(carsCTable, buttonAction, 4);
         } 
         return new JScrollPane(carsCTable);
@@ -270,16 +268,8 @@ public class UserGUI extends JFrame{
         return isAvaible ? "Avaible" : "Not Avaible";
     }
     
-    public void setActualUserDisplay(boolean isPremium){
-        if(!isPremium){
-            sessionInfo.setText("Logged as Standard User : ");
-        }
-        else{
-            sessionInfo.setText("Logged as Premium User : ");   
-        }
-        this.isPremium = isPremium;
+    public void setActualUserDisplay(){
         this.userInfo.setText(this.appModel.getCurrentUser().getUserLogin());
-        this.priceRate = this.appModel.getCurrentUser().getPriceRate();
         this.scrollPaneA = fillCarsATable();
         this.scrollPaneB = fillCarsBTable();
         this.scrollPaneC = fillCarsCTable();

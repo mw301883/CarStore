@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.Model.Raport.Raport;
 import michal.wieczorek.carstore.Model.User.Admin;
 import michal.wieczorek.carstore.Model.User.PremiumUser;
 import michal.wieczorek.carstore.Model.User.StandardUser;
@@ -26,7 +27,9 @@ public class AppModel {
     ArrayList<StandardUser> standardUsers = new ArrayList<>();
     ArrayList<PremiumUser> premiumUsers = new ArrayList<>();
     
-    private User currentUser;
+    private User currentUser = new StandardUser("", "", "", "", "", "");
+    private Raport currentRaport = new Raport();
+    private ArrayList<Raport> raportsList = new ArrayList<>();
     
     public AppModel() {
         //Basic car's initialisation
