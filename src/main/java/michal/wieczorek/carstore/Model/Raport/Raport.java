@@ -6,7 +6,9 @@ package michal.wieczorek.carstore.Model.Raport;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import michal.wieczorek.carstore.Model.User.User;
+import michal.wieczorek.carstore.Model.User.UserEnum;
 
 /**
  *
@@ -16,10 +18,27 @@ public class Raport {
     private double totalPrice = 0.0;
     private Calendar date;
     private ArrayList<User> customerList = new ArrayList<>();
+    private int customerCount = 0;
+
+    public Raport(){
+        
+    }
+    
+    public Raport(Raport raport) {
+        this.totalPrice = raport.totalPrice;
+        this.date = raport.date;
+        this.customerList = raport.customerList;
+        this.customerCount = raport.customerList.size();
+    }
     
     public void calculateTotalPrice(){
         for(User user : this.customerList){
-            this.totalPrice += user.getPayment();
+            if(user.getUserType().equals(UserEnum.UserType.PREMIUM)){
+                this.totalPrice += user.getPayment()*0.7;
+            }
+            else{
+                this.totalPrice += user.getPayment();
+            }
         }
     }
     
@@ -44,5 +63,17 @@ public class Raport {
             }
             ++idx;
         }
+    }
+    
+    public int getCustomerCount(){
+        return this.customerCount;
+    }
+    
+    public Date getDate(){
+        return this.date.getTime();
+    }
+    
+    public double getTotalPrice(){
+        return this.totalPrice;
     }
 }

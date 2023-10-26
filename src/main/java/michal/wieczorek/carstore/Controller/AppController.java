@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.Model.Raport.Raport;
 import michal.wieczorek.carstore.Model.User.User;
-import michal.wieczorek.carstore.View.AdminGUI;
-import michal.wieczorek.carstore.View.ErrorGUI;
-import michal.wieczorek.carstore.View.LoginGUI;
-import michal.wieczorek.carstore.View.PremiumUserGUI;
-import michal.wieczorek.carstore.View.SigningGUI;
-import michal.wieczorek.carstore.View.StandardUserGUI;
+import michal.wieczorek.carstore.View.AdminGUI.AdminGUI;
+import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
+import michal.wieczorek.carstore.View.MainGUI.LoginGUI;
+import michal.wieczorek.carstore.View.UserGUI.PremiumUserGUI;
+import michal.wieczorek.carstore.View.AdminGUI.RaportsDisplayGUI;
+import michal.wieczorek.carstore.View.MainGUI.SigningGUI;
+import michal.wieczorek.carstore.View.UserGUI.StandardUserGUI;
 
 /**
  *
@@ -28,14 +30,10 @@ public class AppController {
     private final LoginGUI loginGUI = new LoginGUI(this);
     private final SigningGUI signingGUI = new SigningGUI(this);
     private final AdminGUI adminGUI;
-    private final StandardUserGUI standardUserGUI;
-    private final PremiumUserGUI premiumUserGUI;
     
     public AppController(AppModel appModel) {
         this.appModel = appModel;
         this.adminGUI = new AdminGUI(this);
-        this.standardUserGUI = new StandardUserGUI(this, appModel);
-        this.premiumUserGUI = new PremiumUserGUI(this, appModel);
         this.loginGUI.setVisible(true);
     }
     
@@ -48,13 +46,11 @@ public class AppController {
                 break;
             case 2:
                 this.loginGUI.setVisible(false);
-                this.standardUserGUI.setActualUserDisplay();
-                this.standardUserGUI.setVisible(true);
+                StandardUserGUI standardUserGUI = new StandardUserGUI(this);
                 break;
             case 3:
                 this.loginGUI.setVisible(false);
-                this.premiumUserGUI.setActualUserDisplay();
-                this.premiumUserGUI.setVisible(true);
+                PremiumUserGUI premiumUserGUI = new PremiumUserGUI(this);
                 break;
             default:
                 ErrorGUI errorMessage = new ErrorGUI();
@@ -74,6 +70,15 @@ public class AppController {
     public void restoreLoginPage(){
         this.loginGUI.cleanTextFields();
         this.loginGUI.setVisible(true);
+    }
+    
+    public void displayReports(){
+        this.adminGUI.setVisible(false);
+        RaportsDisplayGUI raportsDisplayGUI = new RaportsDisplayGUI(this);
+    }
+    
+    public void restoreAdminPage(){
+        this.adminGUI.setVisible(true);
     }
     
     public void setCarAPrice(double NewPrice){
@@ -138,5 +143,29 @@ public class AppController {
         if(user.getPayment() > 0){
             this.appModel.addCustomerToRaport(user);
         }
+    }
+    
+    public ArrayList<CarA> getCarsA(){
+        return this.appModel.getCarsA();
+    }
+    
+    public ArrayList<CarB> getCarsB(){
+        return this.appModel.getCarsB();
+    }
+    
+    public ArrayList<CarC> getCarsC(){
+        return this.appModel.getCarsC();
+    }
+    
+    public User getCurrentUser(){
+        return this.appModel.getCurrentUser();
+    }
+    
+    public void generateRaport(){
+        this.appModel.generateRaport();
+    }
+    
+    public ArrayList<Raport> getCurrentRaportsList(){
+        return this.appModel.getCurrentRaportsList();
     }
 }

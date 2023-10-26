@@ -10,9 +10,9 @@ import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
 import michal.wieczorek.carstore.Model.Raport.Raport;
 import michal.wieczorek.carstore.Model.User.Admin;
-import michal.wieczorek.carstore.Model.User.PremiumUser;
-import michal.wieczorek.carstore.Model.User.StandardUser;
 import michal.wieczorek.carstore.Model.User.User;
+import michal.wieczorek.carstore.Model.User.UserEnum;
+import static michal.wieczorek.carstore.Model.User.UserEnum.UserType.STANDARD;
 
 /**
  *
@@ -24,10 +24,10 @@ public class AppModel {
     ArrayList<CarC> carsC = new ArrayList<>();
     
     Admin AppAdmin = new Admin("password");
-    ArrayList<StandardUser> standardUsers = new ArrayList<>();
-    ArrayList<PremiumUser> premiumUsers = new ArrayList<>();
+    ArrayList<User> standardUsers = new ArrayList<>();
+    ArrayList<User> premiumUsers = new ArrayList<>();
     
-    private User currentUser = new StandardUser("", "", "", "", "", "");
+    private User currentUser = new User("", "", "", "", "", "", UserEnum.UserType.STANDARD);
     private Raport currentRaport = new Raport();
     private ArrayList<Raport> raportsList = new ArrayList<>();
     
@@ -66,24 +66,21 @@ public class AppModel {
     public int handleLogin(ArrayList<String> loginData){
         if(loginData.get(0).equals("admin")){
             if(loginData.get(1).equals(this.AppAdmin.getPassword())){
-                //TODO return int and switch case in controller
                 return 1;
             }
         }
         else{
-            for(StandardUser stdUsr : standardUsers){
+            for(User stdUsr : standardUsers){
                 if(loginData.get(0).equals(stdUsr.getUserLogin())){
                     if(loginData.get(1).equals(stdUsr.getUserPassword())){
-                        //TODO Standard User view
                         this.currentUser = stdUsr;
                         return 2;
                     }
                 }
             }
-            for(PremiumUser prmUsr : premiumUsers){
+            for(User prmUsr : premiumUsers){
                 if(loginData.get(0).equals(prmUsr.getUserLogin())){
                     if(loginData.get(1).equals(prmUsr.getUserPassword())){
-                        //TODO Premium User view
                         this.currentUser = prmUsr;
                         return 3;
                     }
@@ -94,14 +91,14 @@ public class AppModel {
     }
     public void createNewUser(ArrayList<String> userAttributes, boolean isUser){
         if(isUser){
-            standardUsers.add(new StandardUser(userAttributes.get(0), userAttributes.get(1),
+            standardUsers.add(new User(userAttributes.get(0), userAttributes.get(1),
                     userAttributes.get(2), userAttributes.get(3),
-                    userAttributes.get(4), userAttributes.get(5)));
+                    userAttributes.get(4), userAttributes.get(5), UserEnum.UserType.STANDARD));
         }
         else{
-            premiumUsers.add(new PremiumUser(userAttributes.get(0), userAttributes.get(1),
+            premiumUsers.add(new User(userAttributes.get(0), userAttributes.get(1),
                     userAttributes.get(2), userAttributes.get(3),
-                    userAttributes.get(4), userAttributes.get(5)));
+                    userAttributes.get(4), userAttributes.get(5), UserEnum.UserType.PREMIUM));
         }
     }
     
@@ -142,6 +139,13 @@ public class AppModel {
     }
     
     public void generateRaport(){
-        this.raportsList.add(this.currentRaport);
+        Raport currentRaportCopy = new Raport(this.currentRaport);
+        currentRaportCopy.calculateTotalPrice();
+        currentRaportCopy.calculateDate();
+        this.raportsList.add(currentRaportCopy);
+    }
+    
+    public ArrayList<Raport> getCurrentRaportsList(){
+        return this.raportsList;
     }
 }

@@ -9,12 +9,13 @@ import java.util.HashSet;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
+import michal.wieczorek.carstore.Model.User.UserEnum.UserType;
 
 /**
  *
  * @author Michał
  */
-public abstract class User {
+public class User {
     private String name;
     private String surname;
     private String address;
@@ -25,15 +26,17 @@ public abstract class User {
     private HashSet<Integer> reservedCarsB = new HashSet<>();
     private HashSet<Integer> reservedCarsC = new HashSet<>();
     private double payment = 0.0;
+    private UserType userType;
     
     
-    User(String name, String surname, String address, String email, String login, String password){
+    public User(String name, String surname, String address, String email, String login, String password, UserType userType){
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.email = email;
         this.login = login;
         this.password = password;
+        this.userType = userType;
     }
     
     public ArrayList<String> getUserData(){
@@ -125,5 +128,9 @@ public abstract class User {
             }
         }
         return false;
+    }
+    
+    public UserType getUserType(){
+        return this.userType;
     }
 }

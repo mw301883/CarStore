@@ -18,7 +18,5 @@ public class CarStore {
     public static void main(String[] args) {
        AppModel appModel = new AppModel();
        AppController appController = new AppController(appModel);
-       //StandardUserGUI gui = new StandardUserGUI(appController, appModel);
-       //gui.setVisible(true);
     }
 }
