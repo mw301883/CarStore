@@ -76,4 +76,8 @@ public class Raport {
     public double getTotalPrice(){
         return this.totalPrice;
     }
+    
+    public ArrayList<User> getCustomerList(){
+        return this.customerList;
+    }
 }

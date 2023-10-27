@@ -38,7 +38,7 @@ public class RaportsDisplayGUI extends JFrame{
     public RaportsDisplayGUI(AppController appController){
         this.appController = appController;
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.setSize(600, 300);
+        this.setSize(500, 300);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
@@ -97,8 +97,8 @@ public class RaportsDisplayGUI extends JFrame{
                             JTable table = (JTable)e.getSource();
                             int modelRow = Integer.valueOf( e.getActionCommand());
                             ErrorGUI detailsGUI = new ErrorGUI();
-                            detailsGUI.setWindowSize(400, 300);
-                            detailsGUI.DetailsRaportDisplay(raport);
+                            detailsGUI.setWindowSize(800, 200);
+                            detailsGUI.DetailsRaportDisplay(raport, appController);
 			}
 		};
             modelRaportsTable.addRow(new Object[]{index, raport.getCustomerCount(), raport.getDate(), raport.getTotalPrice(), "DETAILS"});
