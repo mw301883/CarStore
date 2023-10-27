@@ -89,7 +89,7 @@ public class RaportsDisplayGUI extends JFrame{
         modelRaportsTable.addColumn("");
         
         int index = 1;
-        for(Raport raport : this.appController.getCurrentRaportsList()){
+        for(Raport raport : this.appController.getRaportsList()){
             Action buttonAction = new AbstractAction()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -98,7 +98,7 @@ public class RaportsDisplayGUI extends JFrame{
                             int modelRow = Integer.valueOf( e.getActionCommand());
                             ErrorGUI detailsGUI = new ErrorGUI();
                             detailsGUI.setWindowSize(800, 200);
-                            detailsGUI.DetailsRaportDisplay(raport, appController);
+                            detailsGUI.DetailsRaportDisplay(appController.getRaportsList().get(modelRow), appController);
 			}
 		};
             modelRaportsTable.addRow(new Object[]{index, raport.getCustomerCount(), raport.getDate(), raport.getTotalPrice(), "DETAILS"});

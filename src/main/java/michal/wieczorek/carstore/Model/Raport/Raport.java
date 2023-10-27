@@ -25,9 +25,15 @@ public class Raport {
     }
     
     public Raport(Raport raport) {
-        this.totalPrice = raport.totalPrice;
+        this.totalPrice = new Double(raport.totalPrice);
         this.date = raport.date;
-        this.customerList = raport.customerList;
+        if(!raport.customerList.equals(null)){
+            ArrayList<User> customerListCopy = new ArrayList<>();
+            for(User user : raport.customerList){
+                customerListCopy.add(new User(user));
+            }
+            this.customerList = customerListCopy;
+        }
         this.customerCount = raport.customerList.size();
     }
     
@@ -35,6 +41,7 @@ public class Raport {
         for(User user : this.customerList){
             if(user.getUserType().equals(UserEnum.UserType.PREMIUM)){
                 this.totalPrice += user.getPayment()*0.7;
+                user.setPayment(user.getPayment()*0.7);
             }
             else{
                 this.totalPrice += user.getPayment();

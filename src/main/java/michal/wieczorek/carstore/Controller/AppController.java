@@ -165,7 +165,7 @@ public class AppController {
         this.appModel.generateRaport();
     }
     
-    public ArrayList<Raport> getCurrentRaportsList(){
-        return this.appModel.getCurrentRaportsList();
+    public ArrayList<Raport> getRaportsList(){
+        return this.appModel.getRaportsList();
     }
 }

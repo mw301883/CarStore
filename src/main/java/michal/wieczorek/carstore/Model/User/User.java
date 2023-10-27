@@ -39,6 +39,20 @@ public class User {
         this.userType = userType;
     }
     
+    public User(User user){
+        this.name = user.name;
+        this.surname = user.surname;
+        this.address = user.address;
+        this.email = user.email;
+        this.login = user.login;
+        this.password = user.password;
+        this.userType = user.userType;
+        this.reservedCarsA = new HashSet<>(user.reservedCarsA);
+        this.reservedCarsB = new HashSet<>(user.reservedCarsB);
+        this.reservedCarsC = new HashSet<>(user.reservedCarsC);
+        this.payment = user.payment;
+    }
+    
     public ArrayList<String> getUserData(){
         ArrayList<String> UserData = new ArrayList<>();
         UserData.add(this.name);
@@ -132,5 +146,9 @@ public class User {
     
     public UserType getUserType(){
         return this.userType;
+    }
+    
+    public void setPayment(double payment){
+        this.payment = payment;
     }
 }

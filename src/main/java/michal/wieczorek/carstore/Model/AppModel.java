@@ -5,6 +5,7 @@
 package michal.wieczorek.carstore.Model;
 
 import java.util.ArrayList;
+import michal.wieczorek.carstore.Exceptions.DoubleUserExeption;
 import michal.wieczorek.carstore.Model.Car.CarA;
 import michal.wieczorek.carstore.Model.Car.CarB;
 import michal.wieczorek.carstore.Model.Car.CarC;
@@ -13,6 +14,7 @@ import michal.wieczorek.carstore.Model.User.Admin;
 import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.Model.User.UserEnum;
 import static michal.wieczorek.carstore.Model.User.UserEnum.UserType.STANDARD;
+import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
 
 /**
  *
@@ -90,15 +92,32 @@ public class AppModel {
         return 4;
     }
     public void createNewUser(ArrayList<String> userAttributes, boolean isUser){
-        if(isUser){
+        try{
+            for(User user : standardUsers){
+                if(user.getUserLogin().equals(userAttributes.get(4))){
+                    throw new DoubleUserExeption();
+                }
+            }
+            for(User user : premiumUsers){
+                if(user.getUserLogin().equals(userAttributes.get(4))){
+                    throw new DoubleUserExeption();
+                }
+            }
+            if(isUser){
             standardUsers.add(new User(userAttributes.get(0), userAttributes.get(1),
                     userAttributes.get(2), userAttributes.get(3),
                     userAttributes.get(4), userAttributes.get(5), UserEnum.UserType.STANDARD));
+            }
+            else{
+                premiumUsers.add(new User(userAttributes.get(0), userAttributes.get(1),
+                        userAttributes.get(2), userAttributes.get(3),
+                        userAttributes.get(4), userAttributes.get(5), UserEnum.UserType.PREMIUM));
+            }
         }
-        else{
-            premiumUsers.add(new User(userAttributes.get(0), userAttributes.get(1),
-                    userAttributes.get(2), userAttributes.get(3),
-                    userAttributes.get(4), userAttributes.get(5), UserEnum.UserType.PREMIUM));
+        catch(DoubleUserExeption e){
+            ErrorGUI message = new ErrorGUI("Can not create duplicated accounts.");
+            message.setSize(300, 125);
+            message.display();
         }
     }
     
@@ -145,7 +164,7 @@ public class AppModel {
         this.raportsList.add(currentRaportCopy);
     }
     
-    public ArrayList<Raport> getCurrentRaportsList(){
+    public ArrayList<Raport> getRaportsList(){
         return this.raportsList;
     }
 }
