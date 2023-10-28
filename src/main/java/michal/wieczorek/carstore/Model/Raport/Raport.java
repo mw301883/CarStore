@@ -11,80 +11,139 @@ import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.Model.User.UserEnum;
 
 /**
- *
- * @author Michał
+ * Represents a report that contains information about customers, their payments, and the report's total price.
+ * @author Michał Wieczorek
+ * @version 1.0
  */
 public class Raport {
-    private double totalPrice = 0.0;
-    private Calendar date;
-    private ArrayList<User> customerList = new ArrayList<>();
-    private int customerCount = 0;
+    /**
+     * The total price of the report.
+     */
+    private double totalPrice = 0.0;  
+    /**
+     * The date when the report is generated.
+     */
+    private Calendar date;     
+    /**
+     * A list of customers included in the report.
+     */
+    private ArrayList<User> customerList = new ArrayList<>();  
+    /**
+     * The count of customers in the report.
+     */
+    private int customerCount = 0;            
 
-    public Raport(){
+    /**
+     * Default constructor for the Raport class.
+     */
+    public Raport() {
         
     }
-    
+
+    /**
+     * Constructor to create a new report based on an existing report.
+     *
+     * @param raport The existing report to use as a template.
+     */
     public Raport(Raport raport) {
         this.totalPrice = new Double(raport.totalPrice);
         this.date = raport.date;
-        if(!raport.customerList.equals(null)){
+
+        if (raport.customerList != null) {
             ArrayList<User> customerListCopy = new ArrayList<>();
-            for(User user : raport.customerList){
+            for (User user : raport.customerList) {
                 customerListCopy.add(new User(user));
             }
             this.customerList = customerListCopy;
         }
+
         this.customerCount = raport.customerList.size();
     }
-    
-    public void calculateTotalPrice(){
-        for(User user : this.customerList){
-            if(user.getUserType().equals(UserEnum.UserType.PREMIUM)){
-                this.totalPrice += user.getPayment()*0.7;
-                user.setPayment(user.getPayment()*0.7);
-            }
-            else{
+
+    /**
+     * Calculate the total price of the report based on customer payments.
+     */
+    public void calculateTotalPrice() {
+        for (User user : this.customerList) {
+            if (user.getUserType().equals(UserEnum.UserType.PREMIUM)) {
+                this.totalPrice += user.getPayment() * 0.7;
+                user.setPayment(user.getPayment() * 0.7);
+            } else {
                 this.totalPrice += user.getPayment();
             }
         }
     }
-    
-    public void calculateDate(){
+
+    /**
+     * Calculate the date when the report is generated.
+     */
+    public void calculateDate() {
         this.date = Calendar.getInstance();
     }
-    
-    public void addCustomer(User customer){
+
+    /**
+     * Add a customer to the report.
+     *
+     * @param customer The customer to be added to the report.
+     */
+    public void addCustomer(User customer) {
         this.customerList.add(customer);
     }
-    
-    public void removeCustomer(User user){
+
+    /**
+     * Remove a customer from the report based on their user information.
+     *
+     * @param user The user to be removed from the report.
+     */
+    public void removeCustomer(User user) {
         int idx = 0;
-        for(User customer : this.customerList){
-            if(customer.getUserName().equals(user.getUserName()) &&
-               customer.getUserSurname().equals(user.getUserSurname()) &&
-               customer.getUserAddress().equals(user.getUserAddress()) &&
-               customer.getUserEmail().equals(user.getUserEmail()) &&
-               customer.getUserLogin().equals(user.getUserLogin())){
+        for (User customer : this.customerList) {
+            if (customer.getUserName().equals(user.getUserName()) &&
+                customer.getUserSurname().equals(user.getUserSurname()) &&
+                customer.getUserAddress().equals(user.getUserAddress()) &&
+                customer.getUserEmail().equals(user.getUserEmail()) &&
+                customer.getUserLogin().equals(user.getUserLogin())) {
                 this.customerList.remove(idx);
                 return;
             }
             ++idx;
         }
     }
-    
-    public int getCustomerCount(){
+
+    /**
+     * Get the count of customers in the report.
+     *
+     * @return The count of customers in the report.
+     */
+    public int getCustomerCount() {
         return this.customerCount;
     }
-    
-    public Date getDate(){
+
+    /**
+     * Get the date when the report is generated.
+     *
+     * @return The date of report generation.
+     */
+    public Date getDate() {
         return this.date.getTime();
     }
-    
-    public double getTotalPrice(){
+
+    /**
+     * Get the total price of the report.
+     *
+     * @return The total price of the report.
+     */
+    public double getTotalPrice() {
         return this.totalPrice;
     }
-    
-    public ArrayList<User> getCustomerList(){
+
+    /**
+     * Get the list of customers included in the report.
+     *
+     * @return The list of customers in the report.
+     */
+    public ArrayList<User> getCustomerList() {
         return this.customerList;
     }
 }
+

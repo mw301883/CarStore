@@ -1,0 +1,12 @@
+michal.wieczorek.carstore
+michal.wieczorek.carstore.Controller
+michal.wieczorek.carstore.Exceptions
+michal.wieczorek.carstore.Model
+michal.wieczorek.carstore.Model.Car
+michal.wieczorek.carstore.Model.Raport
+michal.wieczorek.carstore.Model.User
+michal.wieczorek.carstore.View.AdminGUI
+michal.wieczorek.carstore.View.ButtonColumn
+michal.wieczorek.carstore.View.ErrorGUI
+michal.wieczorek.carstore.View.MainGUI
+michal.wieczorek.carstore.View.UserGUI

@@ -1,0 +1,55 @@
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/Micha³/OneDrive/Dokumenty/NetBeansProjects/CarStore/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Micha³/OneDrive/Dokumenty/NetBeansProjects/CarStore/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'CarStore 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'CarStore 1.0-SNAPSHOT API'
+michal.wieczorek.carstore
+michal.wieczorek.carstore.Controller
+michal.wieczorek.carstore.Exceptions
+michal.wieczorek.carstore.Model
+michal.wieczorek.carstore.Model.Car
+michal.wieczorek.carstore.Model.Raport
+michal.wieczorek.carstore.Model.User
+michal.wieczorek.carstore.View.AdminGUI
+michal.wieczorek.carstore.View.ButtonColumn
+michal.wieczorek.carstore.View.ErrorGUI
+michal.wieczorek.carstore.View.MainGUI
+michal.wieczorek.carstore.View.UserGUI
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\src\main\java = 1697444745239
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\allclasses-index.html = 1698499444527
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\allpackages-index.html = 1698499444533
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\element-list = 1698499444037
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\help-doc.html = 1698499444603
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\index-all.html = 1698499444589
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\index.html = 1698499444497
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\jquery-ui.overrides.css = 1698499444642
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\member-search-index.js = 1698499444547
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\module-search-index.js = 1698499444537
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\overview-summary.html = 1698499444594
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\overview-tree.html = 1698499444489
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\package-search-index.js = 1698499444540
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\script.js = 1698499444612
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\search.js = 1698499444616
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\serialized-form.html = 1698499444275
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\stylesheet.css = 1698499444608
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\tag-search-index.js = 1698499444550
+C:\Users\Micha³\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\site\apidocs\type-search-index.js = 1698499444544

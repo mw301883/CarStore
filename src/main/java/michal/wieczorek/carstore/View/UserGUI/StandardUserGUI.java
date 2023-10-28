@@ -29,22 +29,47 @@ import michal.wieczorek.carstore.Model.Car.CarC;
 import michal.wieczorek.carstore.View.ButtonColumn.ButtonColumn;
 
 /**
- *
- * @author Michał
+ * A graphical user interface for standard users to reserve cars.
+ * @author Michał Wieczorek
+ * @version 1.0
  */
 public class StandardUserGUI extends JFrame{
     
+    /** A reference to the application controller. */
     private final AppController appController;
+    
+    /** Label indicating the availability of cars in the A class. */
     private final JLabel infoLabelA = new JLabel("RESERVE CAR A-CLASS:");
+    
+    /** Label indicating the availability of cars in the B class. */
     private final JLabel infoLabelB = new JLabel("RESERVE CAR B-CLASS:");
+    
+    /** Label indicating the availability of cars in the C class. */
     private final JLabel infoLabelC = new JLabel("RESERVE CAR C-CLASS:");
+    
+    /** Label indicating that the user is logged in as a standard user. */
     private final JLabel sessionInfo = new JLabel("Logged as Standard User : ");
+    
+    /** Label displaying information about the currently logged-in user. */
     private final JLabel userInfo = new JLabel("");
+    
+    /** Button for logging out the user. */
     private final JButton logoutButton = new JButton("LOGOUT");
-    private JScrollPane scrollPaneA;  
-    private JScrollPane scrollPaneB;      
+    
+    /** Scroll pane for the table of cars in class A. */
+    private JScrollPane scrollPaneA;
+    
+    /** Scroll pane for the table of cars in class B. */
+    private JScrollPane scrollPaneB;
+    
+    /** Scroll pane for the table of cars in class C. */
     private JScrollPane scrollPaneC;
-
+    
+    /**
+     * Constructs a StandardUserGUI with the specified AppController.
+     *
+     * @param appController The application controller for handling standard user interactions.
+     */
     public StandardUserGUI(AppController appController){
         this.appController = appController;
         
@@ -93,6 +118,11 @@ public class StandardUserGUI extends JFrame{
         this.setVisible(true);
     }
     
+    /**
+     * Fills the table of available A-class cars.
+     *
+     * @return A JScrollPane containing the A-class cars table.
+     */
     private JScrollPane fillCarsATable(){
         DefaultTableModel modelCarA = new DefaultTableModel() {
             @Override
@@ -154,6 +184,11 @@ public class StandardUserGUI extends JFrame{
         return new JScrollPane(carsATable);
     }
     
+    /**
+     * Fills the table of available B-class cars.
+     *
+     * @return A JScrollPane containing the B-class cars table.
+     */
     private JScrollPane fillCarsBTable(){
         DefaultTableModel modelCarB = new DefaultTableModel() {
             @Override
@@ -212,6 +247,11 @@ public class StandardUserGUI extends JFrame{
         return new JScrollPane(carsBTable);
     }
     
+    /**
+     * Fills the table of available C-class cars.
+     *
+     * @return A JScrollPane containing the C-class cars table.
+     */
     private JScrollPane fillCarsCTable(){
         DefaultTableModel modelCarC = new DefaultTableModel() {
             @Override
@@ -269,16 +309,36 @@ public class StandardUserGUI extends JFrame{
         return new JScrollPane(carsCTable);
     }
     
+    /**
+     * Handles the action of clicking the "LOGOUT" button.
+     *
+     * @param e The ActionEvent object representing the button click.
+     */
     private void handleLogoutButtonClick(ActionEvent e){
         this.dispose();
         //this.setVisible(false);
         this.appController.restoreLoginPage();
     }
     
+    /**
+     * Converts car availability status to a displayable string ("Avaible" or "Not Avaible").
+     *
+     * @param isAvaible True if the car is available; false otherwise.
+     * @return The displayable availability status.
+     */
     private String isAvaibleCar(boolean isAvaible){
         return isAvaible ? "Avaible" : "Not Avaible";
     }
     
+    /**
+     * Validates car access for reserving a car.
+     *
+     * @param car                   The car to validate access for.
+     * @param row                   The row index in the table.
+     * @param isUserReservedListEmpty True if the user's reserved list is empty; false otherwise.
+     * @param reservedCars           The set of reserved cars for the current user.
+     * @return True if car access is allowed; false otherwise.
+     */
     private boolean validateCarAccess(Car car, int row, boolean isUserReservedListEmpty, HashSet<Integer> reservedCars){
         if(!car.getIsAvaible()){
             if(isUserReservedListEmpty){
@@ -294,6 +354,14 @@ public class StandardUserGUI extends JFrame{
         return true;
     }
     
+    /**
+     * Checks if a cell should be blocked for editing based on various factors.
+     *
+     * @param isEditable        True if the cell should be editable; false otherwise.
+     * @param accessValidation  True if car access validation allows editing; false otherwise.
+     * @param isCarAvaible      True if the car is available; false otherwise.
+     * @return "Cancel" if the cell should be blocked; "Rent" if it should be editable; empty string otherwise.
+     */
     private String checkIfCellIsBlock(boolean isEditable, boolean accessValidation, boolean isCarAvaible){
        if(accessValidation && !isCarAvaible){
            return "Cancel";

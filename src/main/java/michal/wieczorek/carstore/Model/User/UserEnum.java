@@ -5,13 +5,20 @@
 package michal.wieczorek.carstore.Model.User;
 
 /**
- *
- * @author Michał
+ * Enumerated type representing different user types in the application.
+ * @author Michał Wieczorek
+ * @version 1.0
  */
 public class UserEnum {
     
-    public enum UserType{
-    STANDARD, PREMIUM;
+    public enum UserType {
+        /**
+         * Represents a standard user type.
+         */
+        STANDARD,
+        /**
+         * Represents a premium user type.
+         */
+        PREMIUM;
     }
-    
 }

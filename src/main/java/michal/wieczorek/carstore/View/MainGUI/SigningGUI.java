@@ -28,31 +28,111 @@ import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
  * @author Michał
  */
 public class SigningGUI extends JFrame {
+    /**
+    * The application controller responsible for managing user interactions.
+    */
     private AppController appController;
     
+    /**
+     * Label displaying registration information.
+     */
     private JLabel infoLabel = new JLabel("Please fill the form in order to create a new account:");
-    private JLabel nameLabel = new JLabel("Name:");
-    private JLabel surnameLabel = new JLabel("Surname:");
-    private JLabel addressLabel = new JLabel("Address:");
-    private JLabel emailLabel = new JLabel("E-mail:");
-    private JLabel loginLabel = new JLabel("Login:");
-    private JLabel passwordLabel = new JLabel("Password:");
-    private JLabel passwordLabelRepeat = new JLabel("Repeat Password:");
-    
-    private JTextField nameTextField = new JTextField(10);
-    private JTextField surnameTextField = new JTextField(10);
-    private JTextField addressTextField = new JTextField(20);
-    private JTextField emailTextField = new JTextField(10);
-    private JTextField loginTextField = new JTextField(10);
-    private JPasswordField passwordTextField = new JPasswordField(10);
-    private JPasswordField passwordTextFieldRepeat = new JPasswordField(10);
-    
-    private JCheckBox userCheckbox = new JCheckBox("User");
-    private JCheckBox premiumUserCheckbox = new JCheckBox("Premium User");
-    
-    private JButton createButton = new JButton("CREATE");
-    private ButtonGroup buttonGroup = new ButtonGroup();
 
+    /**
+     * Label for the user's name.
+     */
+    private JLabel nameLabel = new JLabel("Name:");
+
+    /**
+     * Label for the user's surname.
+     */
+    private JLabel surnameLabel = new JLabel("Surname:");
+
+    /**
+     * Label for the user's address.
+     */
+    private JLabel addressLabel = new JLabel("Address:");
+
+    /**
+     * Label for the user's email.
+     */
+    private JLabel emailLabel = new JLabel("E-mail:");
+
+    /**
+     * Label for the user's login.
+     */
+    private JLabel loginLabel = new JLabel("Login:");
+
+    /**
+     * Label for the user's password.
+     */
+    private JLabel passwordLabel = new JLabel("Password:");
+
+    /**
+     * Label for repeating the user's password.
+     */
+    private JLabel passwordLabelRepeat = new JLabel("Repeat Password:");
+
+    /**
+     * Text field for entering the user's name.
+     */
+    private JTextField nameTextField = new JTextField(10);
+
+    /**
+     * Text field for entering the user's surname.
+     */
+    private JTextField surnameTextField = new JTextField(10);
+
+    /**
+     * Text field for entering the user's address.
+     */
+    private JTextField addressTextField = new JTextField(20);
+
+    /**
+     * Text field for entering the user's email.
+     */
+    private JTextField emailTextField = new JTextField(10);
+
+    /**
+     * Text field for entering the user's login.
+     */
+    private JTextField loginTextField = new JTextField(10);
+
+    /**
+     * Password field for entering the user's password.
+     */
+    private JPasswordField passwordTextField = new JPasswordField(10);
+
+    /**
+     * Password field for entering the user's password (repeated).
+     */
+    private JPasswordField passwordTextFieldRepeat = new JPasswordField(10);
+
+    /**
+     * Checkbox for selecting regular user type.
+     */
+    private JCheckBox userCheckbox = new JCheckBox("User");
+
+    /**
+     * Checkbox for selecting premium user type.
+     */
+    private JCheckBox premiumUserCheckbox = new JCheckBox("Premium User");
+
+    /**
+     * Button for initiating user registration.
+     */
+    private JButton createButton = new JButton("CREATE");
+
+    /**
+     * Button group for managing user type checkboxes.
+     */
+    private ButtonGroup buttonGroup = new ButtonGroup();
+    
+    /**
+     * Constructs a SigningGUI with the specified AppController.
+     *
+     * @param appController The application controller for handling registration.
+     */
     public SigningGUI(AppController appController) {
         this.appController = appController;
         
@@ -106,6 +186,11 @@ public class SigningGUI extends JFrame {
         this.setLocationRelativeTo(null);
     }
     
+    /**
+     * Handles the action of clicking the "CREATE" button.
+     *
+     * @param e The ActionEvent object representing the button click.
+     */
     private void handleCreateButtonClick(ActionEvent e) {
         String name = nameTextField.getText();
         String surname = surnameTextField.getText();
@@ -139,6 +224,18 @@ public class SigningGUI extends JFrame {
         }
     }
     
+    /**
+     * Validates the registration form fields and user type selection.
+     *
+     * @param name          The user's name.
+     * @param surname       The user's surname.
+     * @param address       The user's address.
+     * @param login         The user's login.
+     * @param password      The user's password.
+     * @param isUser        True if the user type is regular; false otherwise.
+     * @param isPremiumUser True if the user type is premium; false otherwise.
+     * @return True if the form is valid; false otherwise.
+     */
     private boolean validateForm(String name, String surname, String address, 
             String login, String password, boolean isUser, boolean isPremiumUser) {
         if (!name.isBlank() && !surname.isBlank() && !address.isBlank() && !login.isBlank() && !password.isBlank()) {
@@ -149,6 +246,9 @@ public class SigningGUI extends JFrame {
         return false;
     }
     
+    /**
+     * Clears text fields and resets user type selection.
+     */
     private void cleanTextFields() {
         nameTextField.setText("");
         surnameTextField.setText("");

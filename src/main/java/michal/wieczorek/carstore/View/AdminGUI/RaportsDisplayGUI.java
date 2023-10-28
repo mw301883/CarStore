@@ -25,16 +25,38 @@ import michal.wieczorek.carstore.View.ButtonColumn.ButtonColumn;
 import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
 
 /**
- *
- * @author Michał
+ * Represents the GUI for displaying a list of all reports in the application.
+ * @author Michał Wieczorek
+ * @version 1.0
  */
 public class RaportsDisplayGUI extends JFrame{
     
-    private final AppController appController;
-    private final JLabel infoLabel = new JLabel("List of all raports :");
-    private JScrollPane scrollPaneRaports;
-    private final JButton cancelButton = new JButton("CANCEL");
-    
+    /**
+    * Represents the graphical user interface (GUI) for displaying a list of all reports in the application.
+    */
+   private final AppController appController;
+
+   /**
+    * Label indicating the purpose of the GUI, which is to show a list of all reports.
+    */
+   private final JLabel infoLabel = new JLabel("List of all reports:");
+
+   /**
+    * Scroll pane used to display the list of reports in a scrollable view.
+    */
+   private JScrollPane scrollPaneRaports;
+
+   /**
+    * Button to cancel and close the GUI for displaying reports.
+    */
+   private final JButton cancelButton = new JButton("CANCEL");
+
+    /**
+     * Initializes the RaportsDisplayGUI with the provided AppController.
+     * Sets up the GUI components for displaying the list of reports.
+     *
+     * @param appController The AppController used for handling actions and data.
+     */
     public RaportsDisplayGUI(AppController appController){
         this.appController = appController;
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -62,6 +84,11 @@ public class RaportsDisplayGUI extends JFrame{
         this.setVisible(true);
     }
     
+    /**
+     * Fills and configures the table with a list of reports.
+     *
+     * @return A JScrollPane containing the table of reports.
+     */
     private JScrollPane fillRaportsTable(){
         DefaultTableModel modelRaportsTable = new DefaultTableModel() {
             @Override
@@ -108,6 +135,11 @@ public class RaportsDisplayGUI extends JFrame{
         return new JScrollPane(raportsTable);
     }
     
+    /**
+     * Handles the "CANCEL" button click event by disposing the GUI and restoring the admin page.
+     *
+     * @param e The ActionEvent triggered by the button click.
+     */
     private void handleCancelButtonClick(ActionEvent e){
         this.dispose();
         this.appController.restoreAdminPage();

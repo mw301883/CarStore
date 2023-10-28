@@ -22,26 +22,55 @@ import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.Model.User.UserEnum;
 
 /**
- *
- * @author Michał
- */
+ * Represents a graphical user interface (GUI) for displaying error messages in the application.
+ * @author Michał Wieczorek
+ * @version 1.0
+*/
 public class ErrorGUI extends JFrame{
-    private JLabel errorInfo = new JLabel("Bad Credentials, try again.");
-    private JButton okButton = new JButton("OK");
+    /**
+    * A label for displaying an error message to the user.
+    */
+   private JLabel errorInfo = new JLabel("Bad Credentials, try again.");
 
+   /**
+    * A button used to acknowledge and close the error message dialog.
+    */
+   private JButton okButton = new JButton("OK");
+
+    
+    /**
+     * Initializes a default error GUI with a fixed size.
+     */
     public ErrorGUI(){
         this.setSize(200, 125);
     }
     
+    /**
+     * Initializes an error GUI with a custom error message and a fixed size.
+     *
+     * @param Message The custom error message to be displayed.
+     */
     public ErrorGUI(String Message){
         errorInfo.setText(Message);
         this.setSize(200, 125);
     }
     
+    /**
+     * Sets the size of the error GUI to custom dimensions.
+     *
+     * @param width  The width of the GUI.
+     * @param height The height of the GUI.
+     */
     public void setWindowSize(int width, int height){
         this.setSize(width, height);
     }
     
+    /**
+     * Displays detailed information from a report, including customer details and reservations.
+     *
+     * @param raport        The report to be displayed.
+     * @param appController The application controller for handling user interactions.
+     */
     public void DetailsRaportDisplay(Raport raport, AppController appController){
         JLabel customerCountInfo = new JLabel("Customer count : " + Integer.toString(raport.getCustomerCount()));
         
@@ -102,9 +131,16 @@ public class ErrorGUI extends JFrame{
         okButton.addActionListener(e -> dispose());
     }
     
+    /**
+     * Defines the user type based on the given UserEnum.
+     *
+     * @param type The user type.
+     * @return A string representing the user type ("STANDARD" or "PREMIUM").
+     */
     private String defineUserType(UserEnum.UserType type){
         return type.equals(UserEnum.UserType.STANDARD) ? "STANDARD" : "PREMIUM";
     }
+    
 //Prototype    
 //    private String returnCarListA(HashSet<Integer> indexList, AppController appController){
 //        String CarString = "";
@@ -142,6 +178,9 @@ public class ErrorGUI extends JFrame{
 //        return  CarString;
 //    }
     
+    /**
+     * Displays the error message in the GUI.
+     */
     public void display(){
         JPanel Panel = new JPanel();
         Panel.add(errorInfo);

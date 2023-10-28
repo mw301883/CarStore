@@ -14,18 +14,52 @@ import javax.swing.border.EmptyBorder;
 import michal.wieczorek.carstore.Controller.AppController;
 
 /**
- *
- * @author Michał
+ * Represents a graphical user interface (GUI) for user login and sign-up in the application.
+ * @author Michał Wieczorek
+ * @version 1.0
  */
 public class LoginGUI extends JFrame {
-    private AppController appController;
-    private JLabel loginLabel = new JLabel("Login:");
-    private JLabel passwordLabel = new JLabel("Password:");
-    private JTextField loginTextField = new JTextField(10);
-    private JPasswordField passwordTextField = new JPasswordField(10);
-    private JButton loginButton = new JButton("SIGN IN");
-    private JButton signingButton = new JButton("SIGN UP");
+    /**
+    * The application controller responsible for managing user interactions.
+    */
+   private AppController appController;
 
+   /**
+    * A label indicating the "Login" input field.
+    */
+   private JLabel loginLabel = new JLabel("Login:");
+
+   /**
+    * A label indicating the "Password" input field.
+    */
+   private JLabel passwordLabel = new JLabel("Password:");
+
+   /**
+    * The text field for entering the user's login credentials.
+    */
+   private JTextField loginTextField = new JTextField(10);
+
+   /**
+    * The password field for entering the user's password.
+    */
+   private JPasswordField passwordTextField = new JPasswordField(10);
+
+   /**
+    * The button used to initiate the login process.
+    */
+   private JButton loginButton = new JButton("SIGN IN");
+
+   /**
+    * The button used to navigate to the sign-up interface.
+    */
+   private JButton signingButton = new JButton("SIGN UP");
+
+    
+    /**
+     * Initializes a LoginGUI with the specified application controller.
+     *
+     * @param appController The application controller for handling user interactions.
+     */
     public LoginGUI(AppController appController) {
         this.appController = appController;
 
@@ -54,20 +88,33 @@ public class LoginGUI extends JFrame {
         signingButton.addActionListener(this::validateSign);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
+    
+    /**
+     * Validates user login credentials and triggers the login process.
+     *
+     * @param e The ActionEvent representing the login button click.
+     */
     private void validateLogin(ActionEvent e) {
         ArrayList<String> loginData = new ArrayList<>();
         loginData.add(loginTextField.getText());
         loginData.add(new String(passwordTextField.getPassword()));
         appController.handleLogin(loginData);
     }
-
+    
+    /**
+     * Switches to the sign-up interface when the "Sign Up" button is clicked.
+     *
+     * @param e The ActionEvent representing the sign-up button click.
+     */
     private void validateSign(ActionEvent e) {
         setVisible(false);
         cleanTextFields();
         appController.handleSigningUp();
     }
-
+    
+    /**
+     * Clears the text fields for login and password.
+     */
     public void cleanTextFields() {
         loginTextField.setText("");
         passwordTextField.setText("");
