@@ -11,7 +11,7 @@ import michal.wieczorek.carstore.Controller.AppController;
 
 /**
  * Main class from which program begins.
- * @author Michał
+ * @author Michał Wieczorek
  * @version 1.0
  */
 public class CarStore {

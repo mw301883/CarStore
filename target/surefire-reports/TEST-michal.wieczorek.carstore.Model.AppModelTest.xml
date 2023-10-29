@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="16" failures="16" name="michal.wieczorek.carstore.Model.AppModelTest" time="0.169" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="17.0.8+9-LTS-211"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Michał\OneDrive\Dokumenty\NetBeansProjects\CarStore"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="PL"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\Michał\OneDrive\Dokumenty\NetBeansProjects\CarStore"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="17.0.8+9-LTS-211"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\MICHA~1\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-17\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="C:\Program Files\NetBeans-17\netbeans\java\maven\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C;C:\Program Files\Graphviz\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Java\jdk-21\bin;C:\Users\Michał\AppData\Local\Microsoft\WindowsApps;C:\Users\Michał\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Users\Michał\AppData\Local\GitHubDesktop\bin;C:\SDL 2\SDL2-2.0.22\lib\x64;C:\Users\Michał\.dotnet\tools;C:\Users\Michał\AppData\Local\Programs\Microsoft VS Code\bin;C:\MinGW\bin;;."/>
+    <property name="maven.conf" value="C:\Program Files\NetBeans-17\netbeans\java\maven/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="library.jansi.path" value="C:\Program Files\NetBeans-17\netbeans\java\maven\lib\jansi-native"/>
+    <property name="user.home" value="C:\Users\Michał"/>
+    <property name="user.timezone" value="Europe/Warsaw"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="17"/>
+    <property name="user.name" value="Michał"/>
+    <property name="java.class.path" value="C:\Program Files\NetBeans-17\netbeans\java\maven\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-17\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 --no-transfer-progress test"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
+    <property name="user.language" value="pl"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="17.0.8"/>
+    <property name="native.encoding" value="Cp1250"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Program Files\NetBeans-17\netbeans\java\maven"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2023-07-18"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testRemoveCustomerFromRaport" time="0.041">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testRemoveCustomerFromRaport(AppModelTest.java:231)
+</failure>
+    <system-out>removeCustomerFromRaport
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testAddCustomerToRaport" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testAddCustomerToRaport(AppModelTest.java:218)
+</failure>
+    <system-out>addCustomerToRaport
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGetCarsA" time="0.032">
+    <failure message="expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarA@123a439b, michal.wieczorek.carstore.Model.Car.CarA@7de26db8, michal.wieczorek.carstore.Model.Car.CarA@1175e2db]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarA@123a439b, michal.wieczorek.carstore.Model.Car.CarA@7de26db8, michal.wieczorek.carstore.Model.Car.CarA@1175e2db]&gt;
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGetCarsA(AppModelTest.java:54)
+</failure>
+    <system-out>getCarsA
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGetCarsB" time="0.001">
+    <failure message="expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarB@41a4555e, michal.wieczorek.carstore.Model.Car.CarB@3830f1c0, michal.wieczorek.carstore.Model.Car.CarB@39ed3c8d]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarB@41a4555e, michal.wieczorek.carstore.Model.Car.CarB@3830f1c0, michal.wieczorek.carstore.Model.Car.CarB@39ed3c8d]&gt;
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGetCarsB(AppModelTest.java:68)
+</failure>
+    <system-out>getCarsB
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGetCarsC" time="0.002">
+    <failure message="expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarC@2d363fb3, michal.wieczorek.carstore.Model.Car.CarC@7d6f77cc, michal.wieczorek.carstore.Model.Car.CarC@5aaa6d82]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;[michal.wieczorek.carstore.Model.Car.CarC@2d363fb3, michal.wieczorek.carstore.Model.Car.CarC@7d6f77cc, michal.wieczorek.carstore.Model.Car.CarC@5aaa6d82]&gt;
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGetCarsC(AppModelTest.java:82)
+</failure>
+    <system-out>getCarsC
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testHandleLogin" time="0.003">
+    <failure message="Cannot invoke &quot;java.util.ArrayList.get(int)&quot; because &quot;loginData&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.util.ArrayList.get(int)&quot; because &quot;loginData&quot; is null
+	at michal.wieczorek.carstore.Model.AppModel.handleLogin(AppModel.java:132)
+	at michal.wieczorek.carstore.Model.AppModelTest.testHandleLogin(AppModelTest.java:96)
+</failure>
+    <system-out>handleLogin
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testCreateNewUser" time="0.002">
+    <failure message="Cannot invoke &quot;java.util.ArrayList.get(int)&quot; because &quot;userAttributes&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.util.ArrayList.get(int)&quot; because &quot;userAttributes&quot; is null
+	at michal.wieczorek.carstore.Model.AppModel.createNewUser(AppModel.java:182)
+	at michal.wieczorek.carstore.Model.AppModelTest.testCreateNewUser(AppModelTest.java:111)
+</failure>
+    <system-out>createNewUser
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReserveCarA" time="0.002">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReserveCarA(AppModelTest.java:126)
+</failure>
+    <system-out>reserveCarA
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReturnCarA" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReturnCarA(AppModelTest.java:139)
+</failure>
+    <system-out>returnCarA
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReserveCarB" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReserveCarB(AppModelTest.java:152)
+</failure>
+    <system-out>reserveCarB
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReturnCarB" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReturnCarB(AppModelTest.java:165)
+</failure>
+    <system-out>returnCarB
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReserveCarC" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReserveCarC(AppModelTest.java:178)
+</failure>
+    <system-out>reserveCarC
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGetCurrentUser" time="0.002">
+    <failure message="expected: &lt;null&gt; but was: &lt;michal.wieczorek.carstore.Model.User.User@16b3fc9e&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;michal.wieczorek.carstore.Model.User.User@16b3fc9e&gt;
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGetCurrentUser(AppModelTest.java:203)
+</failure>
+    <system-out>getCurrentUser
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGenerateRaport" time="0.077">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGenerateRaport(AppModelTest.java:243)
+</failure>
+    <system-out>generateRaport
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testReturnCarC" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at michal.wieczorek.carstore.Model.AppModelTest.testReturnCarC(AppModelTest.java:191)
+</failure>
+    <system-out>returnCarC
+</system-out>
+  </testcase>
+  <testcase classname="michal.wieczorek.carstore.Model.AppModelTest" name="michal.wieczorek.carstore.Model.AppModelTest.testGetRaportsList" time="0.002">
+    <failure message="expected: &lt;null&gt; but was: &lt;[]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;[]&gt;
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at michal.wieczorek.carstore.Model.AppModelTest.testGetRaportsList(AppModelTest.java:255)
+</failure>
+    <system-out>getRaportsList
+</system-out>
+  </testcase>
+</testsuite>

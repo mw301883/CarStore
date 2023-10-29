@@ -17,7 +17,7 @@ import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
 
 /**
  * Represents the application model, which contains the data and business logic of the application.
- * @author Michał
+ * @author Michał Wieczorek
  * @version 1.0
  */
 public class AppModel {

@@ -21,7 +21,7 @@ import michal.wieczorek.carstore.View.UserGUI.StandardUserGUI;
 
 /**
  * Controller class which link main Model class with all Views class. 
- * @author Michał
+ * @author Michał Wieczorek
  * @version 1.0
  */
 public class AppController {

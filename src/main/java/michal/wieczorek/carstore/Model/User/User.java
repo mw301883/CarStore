@@ -13,7 +13,7 @@ import michal.wieczorek.carstore.Model.User.UserEnum.UserType;
 
 /**
  * Represents a user in the application, including personal information, rental orders, and payment data.
- * @author Michał
+ * @author Michał Wieczorek
  * @version 1.0
  */
 public class User {

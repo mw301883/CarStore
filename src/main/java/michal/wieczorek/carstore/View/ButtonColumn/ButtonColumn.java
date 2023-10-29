@@ -137,6 +137,16 @@ public class ButtonColumn extends AbstractCellEditor
 //
 //  Implement TableCellRenderer interface
 //
+        /**
+         * Implement TableCellRenderer interface
+         * @param table 
+         * @param value
+         * @param isSelected
+         * @param hasFocus
+         * @param row
+         * @param column
+         * @return 
+         */
 	public Component getTableCellRendererComponent(
 		JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
