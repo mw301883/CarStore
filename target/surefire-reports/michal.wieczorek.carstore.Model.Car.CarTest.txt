@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: michal.wieczorek.carstore.Model.Car.CarTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+michal.wieczorek.carstore.Model.Car.CarTest.testRentCar()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.Car.Car.rentCar()" because "instance" is null
+	at michal.wieczorek.carstore.Model.Car.CarTest.testRentCar(CarTest.java:46)
+
+michal.wieczorek.carstore.Model.Car.CarTest.testReturnCar()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.Car.Car.returnCar()" because "instance" is null
+	at michal.wieczorek.carstore.Model.Car.CarTest.testReturnCar(CarTest.java:58)
+
+michal.wieczorek.carstore.Model.Car.CarTest.testGetMark()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.Car.Car.getMark()" because "instance" is null
+	at michal.wieczorek.carstore.Model.Car.CarTest.testGetMark(CarTest.java:85)
+
+michal.wieczorek.carstore.Model.Car.CarTest.testGetIsAvaible()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.Car.Car.getIsAvaible()" because "instance" is null
+	at michal.wieczorek.carstore.Model.Car.CarTest.testGetIsAvaible(CarTest.java:99)
+
+michal.wieczorek.carstore.Model.Car.CarTest.testGetName()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.Car.Car.getName()" because "instance" is null
+	at michal.wieczorek.carstore.Model.Car.CarTest.testGetName(CarTest.java:71)
+

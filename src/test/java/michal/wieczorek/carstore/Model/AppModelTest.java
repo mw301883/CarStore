@@ -5,15 +5,6 @@
 package michal.wieczorek.carstore.Model;
 
 import java.util.ArrayList;
-import michal.wieczorek.carstore.Model.Car.CarA;
-import michal.wieczorek.carstore.Model.Car.CarB;
-import michal.wieczorek.carstore.Model.Car.CarC;
-import michal.wieczorek.carstore.Model.Raport.Raport;
-import michal.wieczorek.carstore.Model.User.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,64 +16,6 @@ public class AppModelTest {
     
     public AppModelTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of getCarsA method, of class AppModel.
-     */
-    @Test
-    public void testGetCarsA() {
-        System.out.println("getCarsA");
-        AppModel instance = new AppModel();
-        ArrayList<CarA> expResult = null;
-        ArrayList<CarA> result = instance.getCarsA();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCarsB method, of class AppModel.
-     */
-    @Test
-    public void testGetCarsB() {
-        System.out.println("getCarsB");
-        AppModel instance = new AppModel();
-        ArrayList<CarB> expResult = null;
-        ArrayList<CarB> result = instance.getCarsB();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCarsC method, of class AppModel.
-     */
-    @Test
-    public void testGetCarsC() {
-        System.out.println("getCarsC");
-        AppModel instance = new AppModel();
-        ArrayList<CarC> expResult = null;
-        ArrayList<CarC> result = instance.getCarsC();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of handleLogin method, of class AppModel.
@@ -90,13 +23,42 @@ public class AppModelTest {
     @Test
     public void testHandleLogin() {
         System.out.println("handleLogin");
-        ArrayList<String> loginData = null;
+        ArrayList<String> loginDataAdmin = new ArrayList<>();
+        loginDataAdmin.add("admin");
+        loginDataAdmin.add("password");
+        ArrayList<String> loginDataStdUsr = new ArrayList<>();
+        loginDataStdUsr.add("StdUsr");
+        loginDataStdUsr.add("password");
+        ArrayList<String> loginDataPrmUsr = new ArrayList<>();
+        loginDataPrmUsr.add("PrmUsr");
+        loginDataPrmUsr.add("password");
+        
         AppModel instance = new AppModel();
-        int expResult = 0;
-        int result = instance.handleLogin(loginData);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        ArrayList<String> newStdUserAtr = new ArrayList<>();
+        newStdUserAtr.add(" ");
+        newStdUserAtr.add(" ");
+        newStdUserAtr.add(" ");
+        newStdUserAtr.add(" ");
+        newStdUserAtr.add("StdUsr");
+        newStdUserAtr.add("password");
+        instance.createNewUser(newStdUserAtr, true);
+        
+        ArrayList<String> newPrmUserAtr = new ArrayList<>();
+        newPrmUserAtr.add(" ");
+        newPrmUserAtr.add(" ");
+        newPrmUserAtr.add(" ");
+        newPrmUserAtr.add(" ");
+        newPrmUserAtr.add("PrmUsr");
+        newPrmUserAtr.add("password");
+        instance.createNewUser(newPrmUserAtr, false);
+        
+        int result = instance.handleLogin(loginDataAdmin);
+        assertEquals(1, result, "Admin detection doesn't work.");
+        result = instance.handleLogin(loginDataStdUsr);
+        assertEquals(2, result, "Standard User detection doesn't work.");
+        result = instance.handleLogin(loginDataPrmUsr);
+        assertEquals(3, result, "Premium User detection doesn't work.");
     }
 
     /**
@@ -105,130 +67,36 @@ public class AppModelTest {
     @Test
     public void testCreateNewUser() {
         System.out.println("createNewUser");
-        ArrayList<String> userAttributes = null;
-        boolean isUser = false;
+        ArrayList<String> stdUserAttributes = new ArrayList<>();
+        stdUserAttributes.add(" ");
+        stdUserAttributes.add(" ");
+        stdUserAttributes.add(" ");
+        stdUserAttributes.add(" ");
+        stdUserAttributes.add("StdUsr");
+        stdUserAttributes.add("password");
+        
+        ArrayList<String> prmUserAttributes = new ArrayList<>();
+        prmUserAttributes.add(" ");
+        prmUserAttributes.add(" ");
+        prmUserAttributes.add(" ");
+        prmUserAttributes.add(" ");
+        prmUserAttributes.add("PrmUsr");
+        prmUserAttributes.add("password");
+        
+        ArrayList<String> loginDataStdUsr = new ArrayList<>();
+        loginDataStdUsr.add("StdUsr");
+        loginDataStdUsr.add("password");
+        ArrayList<String> loginDataPrmUsr = new ArrayList<>();
+        loginDataPrmUsr.add("PrmUsr");
+        loginDataPrmUsr.add("password");
+        
         AppModel instance = new AppModel();
-        instance.createNewUser(userAttributes, isUser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of reserveCarA method, of class AppModel.
-     */
-    @Test
-    public void testReserveCarA() {
-        System.out.println("reserveCarA");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.reserveCarA(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of returnCarA method, of class AppModel.
-     */
-    @Test
-    public void testReturnCarA() {
-        System.out.println("returnCarA");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.returnCarA(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of reserveCarB method, of class AppModel.
-     */
-    @Test
-    public void testReserveCarB() {
-        System.out.println("reserveCarB");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.reserveCarB(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of returnCarB method, of class AppModel.
-     */
-    @Test
-    public void testReturnCarB() {
-        System.out.println("returnCarB");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.returnCarB(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of reserveCarC method, of class AppModel.
-     */
-    @Test
-    public void testReserveCarC() {
-        System.out.println("reserveCarC");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.reserveCarC(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of returnCarC method, of class AppModel.
-     */
-    @Test
-    public void testReturnCarC() {
-        System.out.println("returnCarC");
-        int index = 0;
-        AppModel instance = new AppModel();
-        instance.returnCarC(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCurrentUser method, of class AppModel.
-     */
-    @Test
-    public void testGetCurrentUser() {
-        System.out.println("getCurrentUser");
-        AppModel instance = new AppModel();
-        User expResult = null;
-        User result = instance.getCurrentUser();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addCustomerToRaport method, of class AppModel.
-     */
-    @Test
-    public void testAddCustomerToRaport() {
-        System.out.println("addCustomerToRaport");
-        User customer = null;
-        AppModel instance = new AppModel();
-        instance.addCustomerToRaport(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeCustomerFromRaport method, of class AppModel.
-     */
-    @Test
-    public void testRemoveCustomerFromRaport() {
-        System.out.println("removeCustomerFromRaport");
-        User customer = null;
-        AppModel instance = new AppModel();
-        instance.removeCustomerFromRaport(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.createNewUser(stdUserAttributes, true);
+        assertEquals(2, instance.handleLogin(loginDataStdUsr), "Unable to create new Standard User account.");
+        
+        instance.createNewUser(prmUserAttributes, false);
+        assertEquals(3, instance.handleLogin(loginDataPrmUsr), "Unable to create new Premium User account.");
     }
 
     /**
@@ -239,22 +107,8 @@ public class AppModelTest {
         System.out.println("generateRaport");
         AppModel instance = new AppModel();
         instance.generateRaport();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getRaportsList method, of class AppModel.
-     */
-    @Test
-    public void testGetRaportsList() {
-        System.out.println("getRaportsList");
-        AppModel instance = new AppModel();
-        ArrayList<Raport> expResult = null;
-        ArrayList<Raport> result = instance.getRaportsList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int raportsCount = instance.getRaportsList().size();
+        assertEquals(1, raportsCount, "Unable to generate new raport.");
     }
     
 }

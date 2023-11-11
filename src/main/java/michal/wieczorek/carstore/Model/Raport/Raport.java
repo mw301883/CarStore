@@ -7,6 +7,7 @@ package michal.wieczorek.carstore.Model.Raport;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.stream.Collectors;
 import michal.wieczorek.carstore.Model.User.User;
 import michal.wieczorek.carstore.Model.User.UserEnum;
 
@@ -51,13 +52,14 @@ public class Raport {
 
         if (raport.customerList != null) {
             ArrayList<User> customerListCopy = new ArrayList<>();
-            for (User user : raport.customerList) {
-                customerListCopy.add(new User(user));
-            }
+            customerListCopy = (ArrayList<User>) raport.customerList.stream().collect(Collectors.toCollection(ArrayList::new));
+//            for (User user : raport.customerList) {
+//                customerListCopy.add(new User(user));
+//            }
             this.customerList = customerListCopy;
         }
 
-        this.customerCount = raport.customerList.size();
+        this.customerCount = 0;
     }
 
     /**
@@ -88,6 +90,7 @@ public class Raport {
      */
     public void addCustomer(User customer) {
         this.customerList.add(customer);
+        this.customerCount += 1;
     }
 
     /**
@@ -102,8 +105,10 @@ public class Raport {
                 customer.getUserSurname().equals(user.getUserSurname()) &&
                 customer.getUserAddress().equals(user.getUserAddress()) &&
                 customer.getUserEmail().equals(user.getUserEmail()) &&
-                customer.getUserLogin().equals(user.getUserLogin())) {
+                customer.getUserLogin().equals(user.getUserLogin()) &&
+                customer.getUserType().equals(user.getUserType())) {
                 this.customerList.remove(idx);
+                this.customerCount -= 1;
                 return;
             }
             ++idx;

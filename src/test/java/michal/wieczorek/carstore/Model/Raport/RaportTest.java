@@ -4,13 +4,8 @@
  */
 package michal.wieczorek.carstore.Model.Raport;
 
-import java.util.ArrayList;
-import java.util.Date;
 import michal.wieczorek.carstore.Model.User.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import michal.wieczorek.carstore.Model.User.UserEnum;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,22 +17,6 @@ public class RaportTest {
     
     public RaportTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     /**
      * Test of calculateTotalPrice method, of class Raport.
@@ -47,33 +26,21 @@ public class RaportTest {
         System.out.println("calculateTotalPrice");
         Raport instance = new Raport();
         instance.calculateTotalPrice();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of calculateDate method, of class Raport.
-     */
-    @Test
-    public void testCalculateDate() {
-        System.out.println("calculateDate");
-        Raport instance = new Raport();
-        instance.calculateDate();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addCustomer method, of class Raport.
-     */
-    @Test
-    public void testAddCustomer() {
-        System.out.println("addCustomer");
-        User customer = null;
-        Raport instance = new Raport();
-        instance.addCustomer(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        User stdUsr = new User(" ", " ", " ", " ", " ", " ", UserEnum.UserType.STANDARD);
+        stdUsr.setPayment(50.0);
+        instance.addCustomer(stdUsr);
+        instance.addCustomer(stdUsr);
+        
+        instance.calculateTotalPrice();
+        assertEquals(100.0, instance.getTotalPrice(), "Unable to calculate Standard Users in total price.");
+        
+        User prmUsr = new User(" ", " ", " ", " ", " ", " ", UserEnum.UserType.PREMIUM);
+        prmUsr.setPayment(100.0);
+        instance.addCustomer(prmUsr);
+        
+        instance.calculateTotalPrice();
+        assertEquals(170.0, instance.getTotalPrice(), "Unable to calculate Premium Users in total price");
     }
 
     /**
@@ -82,67 +49,23 @@ public class RaportTest {
     @Test
     public void testRemoveCustomer() {
         System.out.println("removeCustomer");
-        User user = null;
+        User stdUsr = new User(" ", " ", " ", " ", " ", " ", UserEnum.UserType.STANDARD);
+        User prmUsr = new User(" ", " ", " ", " ", " ", " ", UserEnum.UserType.PREMIUM);
         Raport instance = new Raport();
-        instance.removeCustomer(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCustomerCount method, of class Raport.
-     */
-    @Test
-    public void testGetCustomerCount() {
-        System.out.println("getCustomerCount");
-        Raport instance = new Raport();
-        int expResult = 0;
-        int result = instance.getCustomerCount();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getDate method, of class Raport.
-     */
-    @Test
-    public void testGetDate() {
-        System.out.println("getDate");
-        Raport instance = new Raport();
-        Date expResult = null;
-        Date result = instance.getDate();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTotalPrice method, of class Raport.
-     */
-    @Test
-    public void testGetTotalPrice() {
-        System.out.println("getTotalPrice");
-        Raport instance = new Raport();
-        double expResult = 0.0;
-        double result = instance.getTotalPrice();
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCustomerList method, of class Raport.
-     */
-    @Test
-    public void testGetCustomerList() {
-        System.out.println("getCustomerList");
-        Raport instance = new Raport();
-        ArrayList<User> expResult = null;
-        ArrayList<User> result = instance.getCustomerList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.addCustomer(stdUsr);
+        instance.removeCustomer(prmUsr);
+        assertEquals(1, instance.getCustomerCount(), "Customer removing algorithm doesn't work corectly - removes wrong customers.");
+        
+        instance.removeCustomer(stdUsr);
+        assertEquals(0, instance.getCustomerCount(), "Unable to remove Standard User.");
+        
+        instance.removeCustomer(prmUsr);
+        assertEquals(0, instance.getCustomerCount(), "Remove wrong Users.");
+        
+        instance.addCustomer(prmUsr);
+        instance.removeCustomer(prmUsr);
+        assertEquals(0, instance.getCustomerCount(), "Unable to remove Premium User.");
     }
     
 }

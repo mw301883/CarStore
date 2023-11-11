@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: michal.wieczorek.carstore.Model.User.AdminTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+michal.wieczorek.carstore.Model.User.AdminTest.testGetPassword()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.User.Admin.getPassword()" because "instance" is null
+	at michal.wieczorek.carstore.Model.User.AdminTest.testGetPassword(AdminTest.java:47)
+
+michal.wieczorek.carstore.Model.User.AdminTest.testSetPassword()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "michal.wieczorek.carstore.Model.User.Admin.setPassword(String)" because "instance" is null
+	at michal.wieczorek.carstore.Model.User.AdminTest.testSetPassword(AdminTest.java:61)
+
