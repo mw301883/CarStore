@@ -28,12 +28,7 @@ public class Raport {
     /**
      * A list of customers included in the report.
      */
-    private ArrayList<User> customerList = new ArrayList<>();  
-    /**
-     * The count of customers in the report.
-     */
-    private int customerCount = 0;            
-
+    private ArrayList<User> customerList = new ArrayList<>();              
     /**
      * Default constructor for the Raport class.
      */
@@ -58,8 +53,6 @@ public class Raport {
 //            }
             this.customerList = customerListCopy;
         }
-
-        this.customerCount = 0;
     }
 
     /**
@@ -90,7 +83,6 @@ public class Raport {
      */
     public void addCustomer(User customer) {
         this.customerList.add(customer);
-        this.customerCount += 1;
     }
 
     /**
@@ -108,7 +100,6 @@ public class Raport {
                 customer.getUserLogin().equals(user.getUserLogin()) &&
                 customer.getUserType().equals(user.getUserType())) {
                 this.customerList.remove(idx);
-                this.customerCount -= 1;
                 return;
             }
             ++idx;
@@ -121,7 +112,7 @@ public class Raport {
      * @return The count of customers in the report.
      */
     public int getCustomerCount() {
-        return this.customerCount;
+        return this.customerList.size();
     }
 
     /**

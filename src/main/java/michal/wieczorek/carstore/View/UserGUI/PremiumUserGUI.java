@@ -111,6 +111,7 @@ public class PremiumUserGUI extends JFrame{
         this.scrollPaneC = fillCarsCTable();  
         
         this.logoutButton.addActionListener(this::handleLogoutButtonClick);
+        this.logoutButton.setToolTipText("Logout from the Store.");
         
         this.userInfo.setText(this.appController.getCurrentUser().getUserLogin());
         

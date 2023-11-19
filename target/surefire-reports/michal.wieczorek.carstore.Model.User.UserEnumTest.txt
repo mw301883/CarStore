@@ -1,10 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: michal.wieczorek.carstore.Model.User.UserEnumTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
-michal.wieczorek.carstore.Model.User.UserEnumTest.testSomeMethod()  Time elapsed: 0 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in michal.wieczorek.carstore.Model.User.UserEnumTest
+testSomeMethod  Time elapsed: 0 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: The test case is a prototype.
-	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
 	at michal.wieczorek.carstore.Model.User.UserEnumTest.testSomeMethod(UserEnumTest.java:42)
 

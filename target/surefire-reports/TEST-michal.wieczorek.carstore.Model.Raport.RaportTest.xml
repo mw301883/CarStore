@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="michal.wieczorek.carstore.Model.Raport.RaportTest" time="0.048" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="michal.wieczorek.carstore.Model.Raport.RaportTest" time="0.001" tests="2" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,8 @@
     <property name="user.country" value="PL"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\MICHA~1\AppData\Local\Temp\surefire12254401463530047061\surefirebooter7404471743205009109.jar C:\Users\Michał\AppData\Local\Temp\surefire12254401463530047061 2023-11-11T16-41-18_150-jvmRun1 surefire18096662178650045306tmp surefire_01442982031527044896tmp"/>
+    <property name="sun.java.command" value="C:\Users\MICHA~1\AppData\Local\Temp\surefire6340865725240916524\surefirebooter11032006407798799826.jar C:\Users\Michał\AppData\Local\Temp\surefire6340865725240916524 2023-11-19T15-18-19_140-jvmRun1 surefire10159919807136343071tmp surefire_02409989711659503486tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="michal.wieczorek.carstore.Model.Raport.RaportTest#testRemoveCustomer"/>
     <property name="surefire.test.class.path" value="C:\Users\Michał\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\test-classes;C:\Users\Michał\OneDrive\Dokumenty\NetBeansProjects\CarStore\target\classes;C:\Users\Michał\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Michał\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Michał\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Michał\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Michał\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Michał\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Michał\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Michał"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\MICHA~1\AppData\Local\Temp\surefire12254401463530047061\surefirebooter7404471743205009109.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\MICHA~1\AppData\Local\Temp\surefire6340865725240916524\surefirebooter11032006407798799826.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.8+9-LTS-211"/>
@@ -58,5 +57,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testRemoveCustomer" classname="michal.wieczorek.carstore.Model.Raport.RaportTest" time="0.037"/>
+  <testcase name="testCalculateTotalPrice" classname="michal.wieczorek.carstore.Model.Raport.RaportTest" time="0.001">
+    <failure message="Unable to calculate Premium Users in total price ==&gt; expected: &lt;170.0&gt; but was: &lt;270.0&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Unable to calculate Premium Users in total price ==> expected: <170.0> but was: <270.0>
+	at michal.wieczorek.carstore.Model.Raport.RaportTest.testCalculateTotalPrice(RaportTest.java:43)
+]]></failure>
+    <system-out><![CDATA[calculateTotalPrice
+]]></system-out>
+  </testcase>
+  <testcase name="testRemoveCustomer" classname="michal.wieczorek.carstore.Model.Raport.RaportTest" time="0"/>
 </testsuite>

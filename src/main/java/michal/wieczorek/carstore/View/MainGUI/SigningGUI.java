@@ -169,6 +169,7 @@ public class SigningGUI extends JFrame {
         buttonPanel.add(createButton);
         
         createButton.addActionListener(this::handleCreateButtonClick);
+        createButton.setToolTipText("Create new Customer account.");
         
         this.addWindowListener(new WindowAdapter() {
             @Override

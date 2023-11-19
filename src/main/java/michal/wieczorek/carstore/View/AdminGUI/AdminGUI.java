@@ -144,11 +144,17 @@ public class AdminGUI extends JFrame{
         this.setLocationRelativeTo(null);
         
         carAButton.addActionListener(this::handleCarAButton);
+        carAButton.setToolTipText("Set price of Car A group.");
         carBButton.addActionListener(this::handleCarBButton);
+        carBButton.setToolTipText("Set price of Car B group.");
         carCButton.addActionListener(this::handleCarCButton);
+        carCButton.setToolTipText("Set price of Car C group.");
         generateRaportButton.addActionListener(this::handleGenerateRaport);
+        generateRaportButton.setToolTipText("Generate new raport.");
         displayRaportsButton.addActionListener(this::handleDisplayRaports);
+        displayRaportsButton.setToolTipText("Display all raport list.");
         logoutButton.addActionListener(this::handleLogoutButton);
+        logoutButton.setToolTipText("Logout from admin panel.");
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
     

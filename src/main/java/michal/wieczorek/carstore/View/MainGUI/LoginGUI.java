@@ -85,7 +85,9 @@ public class LoginGUI extends JFrame {
         this.setLocationRelativeTo(null);
 
         loginButton.addActionListener(this::validateLogin);
+        loginButton.setToolTipText("Login to Store or Admin Panel.");
         signingButton.addActionListener(this::validateSign);
+        signingButton.setToolTipText("Create new Customer account.");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     

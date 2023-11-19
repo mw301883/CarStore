@@ -76,6 +76,7 @@ public class RaportsDisplayGUI extends JFrame{
         buttonPanel.add(this.cancelButton);
         
         this.cancelButton.addActionListener(this::handleCancelButtonClick);
+        this.cancelButton.setToolTipText("Back to main page.");
         
         this.add(buttonPanel, BorderLayout.SOUTH);
         this.add(raportsTablePanel, BorderLayout.CENTER);
