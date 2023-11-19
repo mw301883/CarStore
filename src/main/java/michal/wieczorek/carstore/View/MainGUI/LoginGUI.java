@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -85,8 +86,29 @@ public class LoginGUI extends JFrame {
         this.setLocationRelativeTo(null);
 
         loginButton.addActionListener(this::validateLogin);
+        KeyStroke enterKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        loginButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(enterKeyStroke, "enter");
+        loginButton.getActionMap().put("enter", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<String> loginData = new ArrayList<>();
+                loginData.add(loginTextField.getText());
+                loginData.add(new String(passwordTextField.getPassword()));
+                appController.handleLogin(loginData);
+            }
+        });
         loginButton.setToolTipText("Login to Store or Admin Panel.");
         signingButton.addActionListener(this::validateSign);
+        KeyStroke ctrlSKeyStroke = KeyStroke.getKeyStroke("control S");
+        loginButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ctrlSKeyStroke, "ctrlS");
+        loginButton.getActionMap().put("ctrlS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                cleanTextFields();
+                appController.handleSigningUp();
+            }
+        });
         signingButton.setToolTipText("Create new Customer account.");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

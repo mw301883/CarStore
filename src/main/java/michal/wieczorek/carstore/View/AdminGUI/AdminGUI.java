@@ -8,11 +8,15 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import michal.wieczorek.carstore.Controller.AppController;
 import michal.wieczorek.carstore.Model.Car.CarA;
@@ -150,10 +154,36 @@ public class AdminGUI extends JFrame{
         carCButton.addActionListener(this::handleCarCButton);
         carCButton.setToolTipText("Set price of Car C group.");
         generateRaportButton.addActionListener(this::handleGenerateRaport);
+        KeyStroke ctrlGKeyStroke = KeyStroke.getKeyStroke("control G");
+        this.logoutButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ctrlGKeyStroke, "ctrlG");
+        this.logoutButton.getActionMap().put("ctrlG", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                appController.generateRaport();
+            }
+        });
         generateRaportButton.setToolTipText("Generate new raport.");
         displayRaportsButton.addActionListener(this::handleDisplayRaports);
+        KeyStroke ctrlDKeyStroke = KeyStroke.getKeyStroke("control D");
+        this.logoutButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ctrlDKeyStroke, "ctrlD");
+        this.logoutButton.getActionMap().put("ctrlD", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                appController.displayReports();
+            }
+        });
         displayRaportsButton.setToolTipText("Display all raport list.");
         logoutButton.addActionListener(this::handleLogoutButton);
+        KeyStroke escKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        this.logoutButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escKeyStroke, "escape");
+        this.logoutButton.getActionMap().put("escape", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cleanTextFields();
+                setVisible(false);
+                appController.restoreLoginPage();
+            }
+        });
         logoutButton.setToolTipText("Logout from admin panel.");
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }

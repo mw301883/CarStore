@@ -8,17 +8,21 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import michal.wieczorek.carstore.Controller.AppController;
 import michal.wieczorek.carstore.View.ErrorGUI.ErrorGUI;
@@ -169,6 +173,43 @@ public class SigningGUI extends JFrame {
         buttonPanel.add(createButton);
         
         createButton.addActionListener(this::handleCreateButtonClick);
+        KeyStroke enterKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        createButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(enterKeyStroke, "enter");
+        createButton.getActionMap().put("enter", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameTextField.getText();
+                String surname = surnameTextField.getText();
+                String address = addressTextField.getText();
+                String email = emailTextField.getText();
+                String login = loginTextField.getText();
+                String password = new String(passwordTextField.getPassword());
+                String passwordRepeat = new String(passwordTextFieldRepeat.getPassword());
+                boolean isUser = userCheckbox.isSelected();
+                boolean isPremiumUser = premiumUserCheckbox.isSelected();
+
+                if (validateForm(name, surname, address, login, password, isUser, isPremiumUser)) {
+                    if (password.equals(passwordRepeat)) {
+                        setVisible(false);
+                        ArrayList<String> userAttributes = new ArrayList<>();
+                        userAttributes.add(name);
+                        userAttributes.add(surname);
+                        userAttributes.add(address);
+                        userAttributes.add(email);
+                        userAttributes.add(login);
+                        userAttributes.add(password);
+                        appController.createNewUser(userAttributes, isUser);
+                        cleanTextFields();
+                    } else {
+                        ErrorGUI errorMessage = new ErrorGUI("Different passwords, try again.");
+                        errorMessage.display();
+                    }
+                } else {
+                    ErrorGUI errorMessage = new ErrorGUI();
+                    errorMessage.display();
+                }
+            }
+        });
         createButton.setToolTipText("Create new Customer account.");
         
         this.addWindowListener(new WindowAdapter() {
